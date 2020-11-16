@@ -1,11 +1,19 @@
-#pragma once
+/*
+	Simple logger by SanceiLaks
+	https://github.com/Sanceilaks/simple-logger
+	
+	@date: 15.11.2020
+*/
+
+
+#ifndef LLOG
+#define LLOG
 
 #include <string>
 
 #ifndef LAPI
 #define LAPI
 #endif
-
 
 namespace logger
 {
@@ -36,3 +44,5 @@ namespace logger
 	 */
 	LAPI void set_log_func(log_func func);
 }
+
+#endif

@@ -24,12 +24,21 @@
     <ClCompile Include="deps\include\logger.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\interfaces.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hack_core.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="deps\include\logger.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_interfaces\engine_client.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interfaces.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

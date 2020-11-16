@@ -1,18 +1,13 @@
 #include <iostream>
 #include <cstdio>
 #include <Windows.h>
-
 #include "hack_core.h"
-
 #include <fstream>
-
 #include <logger.h>
 
 
 void init()
-{
-	//freopen("", "w", stdout);
-	
+{	
 	if (!hack_core::init())
 		fprintf(stderr, "hack_core::init error!\n");
 

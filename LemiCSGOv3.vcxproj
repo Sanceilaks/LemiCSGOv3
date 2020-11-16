@@ -142,10 +142,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="deps\include\logger.cpp" />
+    <ClCompile Include="src\interfaces.cpp" />
     <ClCompile Include="src\hack_core.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\interfaces.h" />
+    <ClInclude Include="src\game_interfaces\engine_client.h" />
     <ClInclude Include="src\hack_core.h" />
     <ClInclude Include="deps\include\logger.h" />
   </ItemGroup>
