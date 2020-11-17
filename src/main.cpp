@@ -14,10 +14,8 @@ void init()
 
 	logger::log("Hello from csgo!");
 
-	char log[240];
-	
+	char* log = new char();
 	sprintf(log, "Engine client %d", reinterpret_cast<int>(interfaces::engine));	
-	
 	logger::log(log);
 }
 
@@ -31,7 +29,7 @@ BOOL APIENTRY DllMain(HMODULE dll, DWORD reason, LPVOID reserved)	//https://docs
 	}
 	else if (reason==DLL_PROCESS_DETACH)
 	{
-		//TO:DO 	
+		//TODO 	
 	}
 	
 	return TRUE;

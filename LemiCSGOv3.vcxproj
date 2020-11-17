@@ -142,13 +142,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="deps\include\logger.cpp" />
+    <ClCompile Include="deps\include\math\math.cpp" />
+    <ClCompile Include="deps\include\math\vector3d.cpp" />
     <ClCompile Include="deps\include\tools\mem_tools.cpp" />
     <ClCompile Include="src\interfaces.cpp" />
     <ClCompile Include="src\hack_core.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="deps\include\math\math.h" />
+    <ClInclude Include="deps\include\math\vector.h" />
+    <ClInclude Include="deps\include\math\vector2d.h" />
+    <ClInclude Include="deps\include\math\vector3d.h" />
     <ClInclude Include="deps\include\tools\mem_tools.h" />
+    <ClInclude Include="src\game_interfaces\i_panel.h" />
+    <ClInclude Include="src\game_interfaces\v_client_entity_list.h" />
+    <ClInclude Include="src\game_interfaces\v_debug_overlay.h" />
     <ClInclude Include="src\interfaces.h" />
     <ClInclude Include="src\game_interfaces\engine_client.h" />
     <ClInclude Include="src\hack_core.h" />

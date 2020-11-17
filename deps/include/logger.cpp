@@ -7,6 +7,8 @@
 
 std::string log_file = "log.llog";
 bool log_in_file = true;
+logger::_clog* clog = new logger::_clog();
+
 
 void std_log_func(const std::string& text, logger::log_lvl _log_lvl)
 {
@@ -46,5 +48,7 @@ void logger::set_log_func(log_func func)
 	current_log_func = func;
 }
 
-
-
+void logger::_clog::operator<<(const std::string& text)
+{
+	log(text);
+}

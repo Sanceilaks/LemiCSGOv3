@@ -33,7 +33,7 @@ namespace logger
 		"[W]",
 		"[E]"
 	};
-
+	
 	typedef void(*log_func)(const std::string& text, log_lvl _log_lvl);
 	
 	LAPI void set_log_file(const std::string& file);
