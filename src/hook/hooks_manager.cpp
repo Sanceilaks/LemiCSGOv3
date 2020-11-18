@@ -14,5 +14,14 @@ void HooksManager::init()
 	}
 
 
+
+	
+
 	MH_EnableHook(MH_ALL_HOOKS);
+}
+
+void HooksManager::shutdown()
+{
+	MH_RemoveHook(MH_ALL_HOOKS);
+	MH_Uninitialize();
 }
