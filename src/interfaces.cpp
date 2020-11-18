@@ -1,8 +1,12 @@
 #include "interfaces.h"
 #include <tools/mem_tools.h>
 
+#include "logger.h"
+
 
 Interfaces* interfaces = new Interfaces();
+
+typedef unsigned int DWORD;
 
 void Interfaces::init()
 {
@@ -16,5 +20,9 @@ void Interfaces::init()
 
 void Interfaces::print_interfaces()
 {
-
+	logger::logf(logger::msg, "Engine -> %d", reinterpret_cast<int>(engine));
+	logger::logf(logger::msg, "EntityList -> %d", reinterpret_cast<int>(entity_list));
+	logger::logf(logger::msg, "DebugOverlay -> %d", reinterpret_cast<int>(debug_overlay));
+	logger::logf(logger::msg, "Panel -> %d", reinterpret_cast<int>(panel));
+	
 }

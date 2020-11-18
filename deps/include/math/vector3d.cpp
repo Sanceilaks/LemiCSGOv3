@@ -116,6 +116,8 @@ Vector& Vector::operator=(const Vector& other)
 	x = other.x;
 	y = other.y;
 	z = other.z;
+
+	return *this;
 }
 
 float Vector::operator[](int index) const
