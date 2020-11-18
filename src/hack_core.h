@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-class hack_core
+class HackCore
 {
 public:
-	static bool init();
-};
+	bool init();
+}; extern HackCore* hack_core;

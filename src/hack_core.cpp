@@ -1,8 +1,11 @@
 ﻿#include "hack_core.h"
 #include "interfaces.h"
 
-bool hack_core::init()
+
+HackCore* hack_core = new HackCore();
+
+bool HackCore::init()
 {
-	interfaces::init();
+	interfaces->init();
 	return true;
 }

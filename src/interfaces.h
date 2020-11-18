@@ -10,15 +10,15 @@
 
 
 
-class interfaces
+class Interfaces
 {
 public:
-	static IVEngineClient* engine;
-	static VClientEntityList* entity_list;
-	static VDebugOverlay* debug_overlay;
-	static IPanel* panel;
+	IVEngineClient* engine;
+	VClientEntityList* entity_list;
+	VDebugOverlay* debug_overlay;
+	IPanel* panel;
 
 	
-	static void init();
-	static void print_interfaces();
-};
+	void init();
+	void print_interfaces();
+}; extern Interfaces* interfaces;

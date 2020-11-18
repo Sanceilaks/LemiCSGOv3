@@ -2,12 +2,9 @@
 #include <tools/mem_tools.h>
 
 
-IVEngineClient* interfaces::engine;
-VClientEntityList* interfaces::entity_list;
-VDebugOverlay* interfaces::debug_overlay;
-IPanel* interfaces::panel;
+Interfaces* interfaces = new Interfaces();
 
-void interfaces::init()
+void Interfaces::init()
 {
 	engine = static_cast<IVEngineClient*>(mem_tools::capture_interface("engine.dll", "VEngineClient014"));
 	entity_list = static_cast<VClientEntityList*>(mem_tools::capture_interface("client.dll", "VClientEntityList003"));
@@ -17,7 +14,7 @@ void interfaces::init()
 }
 
 
-void interfaces::print_interfaces()
+void Interfaces::print_interfaces()
 {
 
 }

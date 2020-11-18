@@ -9,13 +9,13 @@
 
 void init()
 {	
-	if (!hack_core::init())
+	if (!hack_core->init())
 		fprintf(stderr, "hack_core::init error!\n");
 
 	logger::log("Hello from csgo!");
 
 	char* log = new char();
-	sprintf(log, "Engine client %d", reinterpret_cast<int>(interfaces::engine));	
+	sprintf(log, "Engine client %d", reinterpret_cast<int>(interfaces->engine));	
 	logger::log(log);
 }
 
