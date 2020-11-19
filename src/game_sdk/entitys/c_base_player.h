@@ -24,7 +24,8 @@ public:
 	NETVAR("DT_CSPlayer", "m_fFlags", get_flags, int);
 	NETVAR("DT_BasePlayer", "m_lifeState", get_life_state, bool);
 	NETVAR("DT_CSPlayer", "m_bIsScoped", is_scoped, bool);
-
+	NETVAR("CBasePlayer", "m_vecVelocity[0]", get_velocity, Vector);
+	
 	inline bool is_alive() { return this->get_life_state() == 0; }
 };
 

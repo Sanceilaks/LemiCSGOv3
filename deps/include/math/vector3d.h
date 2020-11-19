@@ -31,7 +31,8 @@ public:
 	float dot(const Vector& pos) const;
 
 	float length();
-
+	float length2d();
+	
 	float distance(const Vector& to);
 	
 	Vector& operator=(const Vector& other);

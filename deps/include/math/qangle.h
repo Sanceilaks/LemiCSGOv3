@@ -226,3 +226,17 @@ inline QAngle operator/(float lhs, const QAngle& rhs)
 {
 	return rhs / lhs;
 }
+
+inline static float normalize_angel(float angle)
+{
+	if (angle > 180.f || angle < -180.f) {
+		auto revolutions = std::round(std::abs(angle / 360.f));
+
+		if (angle < 0.f)
+			angle = angle + 360.f * revolutions;
+		else
+			angle = angle - 360.f * revolutions;
+	}
+
+	return angle;
+}

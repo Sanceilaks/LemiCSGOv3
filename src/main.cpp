@@ -7,6 +7,8 @@
 #include <thread>
 #include <game_sdk/misc/color.h>
 #include "interfaces.h"
+#include "tools/file_tools.h"
+#include <Lmcons.h>
 
 HMODULE g_dll;
 
@@ -20,10 +22,20 @@ void init()
 
 
 	//All done message
-	interfaces->engine->execute_client_cmd("clear");
+	interfaces->cvar->console_printf("\n\n");
 	interfaces->cvar->console_color_printf(Color(255, 0, 0), "LemiCSGO is injected!\n\tCreated by:\n");
 	interfaces->cvar->console_color_printf(Color(0, 255, 0), "SL %s\t", SL_LINK);
-	interfaces->cvar->console_color_printf(Color(0, 0, 255), "ZertMARK %s\n", ZERT_MARK_LINK);
+	interfaces->cvar->console_color_printf(Color(0, 0, 255), "ZertMARK %s\n\n", ZERT_MARK_LINK);
+
+	auto p = file_tools::get_hack_directory();
+	interfaces->cvar->console_printf("Home directory: %s\n\n", p.c_str());
+
+	TCHAR name[UNLEN + 1];
+	DWORD size = UNLEN + 1;
+
+	GetUserName((TCHAR*)name, &size);
+	
+	interfaces->cvar->console_color_printf(Color(255, 0, 0), "Hello, %s\n\n", name);
 }
 
 

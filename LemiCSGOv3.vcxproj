@@ -149,8 +149,10 @@
     <ClCompile Include="deps\include\minhook\hde\hde64.c" />
     <ClCompile Include="deps\include\minhook\hook.c" />
     <ClCompile Include="deps\include\minhook\trampoline.c" />
+    <ClCompile Include="deps\include\tools\file_tools.cpp" />
     <ClCompile Include="deps\include\tools\mem_tools.cpp" />
     <ClCompile Include="deps\include\tools\netvars.cpp" />
+    <ClCompile Include="deps\include\tools\platform_folders.cpp" />
     <ClCompile Include="src\game_sdk\misc\checksum_crc.cpp" />
     <ClCompile Include="src\hook\hooks\create_move.cpp" />
     <ClCompile Include="src\hook\hooks_manager.cpp" />
@@ -172,8 +174,10 @@
     <ClInclude Include="deps\include\minhook\hde\table64.h" />
     <ClInclude Include="deps\include\minhook\minhook.h" />
     <ClInclude Include="deps\include\minhook\trampoline.h" />
+    <ClInclude Include="deps\include\tools\file_tools.h" />
     <ClInclude Include="deps\include\tools\mem_tools.h" />
     <ClInclude Include="deps\include\tools\netvars.h" />
+    <ClInclude Include="deps\include\tools\platform_folders.h" />
     <ClInclude Include="src\game_sdk\entitys\c_base_entity.h" />
     <ClInclude Include="src\game_sdk\entitys\c_base_player.h" />
     <ClInclude Include="src\game_sdk\entitys\entitys.h" />

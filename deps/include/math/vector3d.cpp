@@ -104,6 +104,11 @@ float Vector::length()
 	return sqrt(x * x + y * y + z * z);
 }
 
+float Vector::length2d()
+{
+	return sqrt(x * x + y * y);
+}
+
 float Vector::distance(const Vector& to)
 {
 	Vector delta;
