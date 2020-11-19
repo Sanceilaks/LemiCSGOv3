@@ -81,7 +81,7 @@ void auto_strafe(CUserCmd* cmd)
 bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
 {
 	if (!ucmd || !ucmd->command_number)
-		return hooks::create_move_hook::original(interfaces->client_mode, frame_time, ucmd);
+		return original(interfaces->client_mode, frame_time, ucmd);
 
 	DWORD move;
 	_asm mov move, ebp;

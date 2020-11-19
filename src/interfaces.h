@@ -8,6 +8,7 @@
 #include "game_sdk/interfaces/i_client_mode.h"
 #include "game_sdk/interfaces/v_base_client.h"
 #include "game_sdk/interfaces/i_cvar.h"
+#include <d3d9.h>
 
 #pragma endregion 
 
@@ -23,6 +24,7 @@ public:
 	IClientMode* client_mode;
 	VBaseClient* client;
 	ICvar* cvar;
+	IDirect3DDevice9* direct_device;
 	
 	void init();
 	void print_interfaces();

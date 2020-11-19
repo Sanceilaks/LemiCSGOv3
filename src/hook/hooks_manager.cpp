@@ -12,7 +12,9 @@ inline unsigned int get_virtual(void* _class, unsigned int index) { return stati
 void HooksManager::init()
 {
 	hooks::create_move_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->client_mode, hooks::create_move_hook::index));
-
+	hooks::end_scane_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->direct_device, hooks::end_scane_hook::index));
+	hooks::reset_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->direct_device, hooks::reset_hook::index));
+	
 	
 	if (MH_Initialize() != MH_OK)
 	{
@@ -24,6 +26,15 @@ void HooksManager::init()
 		throw std::exception("Failed to hook create_move");
 	}
 
+	if (MH_CreateHook(hooks::end_scane_hook::target, &hooks::end_scane_hook::hook, reinterpret_cast<void**>(&hooks::end_scane_hook::original)) != MH_OK)
+	{
+		throw std::exception("Failed to hook end_scane_hook");
+	}
+
+	if (MH_CreateHook(hooks::reset_hook::target, &hooks::reset_hook::hook, reinterpret_cast<void**>(&hooks::reset_hook::original)) != MH_OK)
+	{
+		throw std::exception("Failed to hook reset_hook");
+	}
 	
 	MH_EnableHook(MH_ALL_HOOKS);
 }

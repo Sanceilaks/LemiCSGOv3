@@ -14,7 +14,7 @@ void* mem_tools::capture_interface(const char* _module, const char* _interface)
     return static_cast<void*>(tempInterface(_interface, 0));
 }
 
-uint8_t* mem_tools::patternt_scanner(const char* module_name, const char* signature) noexcept
+uint8_t* mem_tools::pattern_scaner(const char* module_name, const char* signature) noexcept
 {
     const auto module_handle = GetModuleHandleA(module_name);
 

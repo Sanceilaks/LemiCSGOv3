@@ -141,6 +141,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="deps\include\imgui\imgui.cpp" />
+    <ClCompile Include="deps\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="deps\include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="deps\include\imgui\impl\imgui_impl_dx9.cpp" />
+    <ClCompile Include="deps\include\imgui\impl\imgui_impl_win32.cpp" />
     <ClCompile Include="deps\include\logger.cpp" />
     <ClCompile Include="deps\include\math\math.cpp" />
     <ClCompile Include="deps\include\math\vector3d.cpp" />
@@ -153,14 +158,25 @@
     <ClCompile Include="deps\include\tools\mem_tools.cpp" />
     <ClCompile Include="deps\include\tools\netvars.cpp" />
     <ClCompile Include="deps\include\tools\platform_folders.cpp" />
+    <ClCompile Include="src\features\menu\menu.cpp" />
+    <ClCompile Include="src\features\menu\widgets.cpp" />
     <ClCompile Include="src\game_sdk\misc\checksum_crc.cpp" />
     <ClCompile Include="src\hook\hooks\create_move.cpp" />
+    <ClCompile Include="src\hook\hooks\directx.cpp" />
     <ClCompile Include="src\hook\hooks_manager.cpp" />
     <ClCompile Include="src\interfaces.cpp" />
     <ClCompile Include="src\hack_core.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="deps\include\imgui\imconfig.h" />
+    <ClInclude Include="deps\include\imgui\imgui.h" />
+    <ClInclude Include="deps\include\imgui\imgui_internal.h" />
+    <ClInclude Include="deps\include\imgui\impl\imgui_impl_dx9.h" />
+    <ClInclude Include="deps\include\imgui\impl\imgui_impl_win32.h" />
+    <ClInclude Include="deps\include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="deps\include\imgui\imstb_textedit.h" />
+    <ClInclude Include="deps\include\imgui\imstb_truetype.h" />
     <ClInclude Include="deps\include\math\math.h" />
     <ClInclude Include="deps\include\math\qangle.h" />
     <ClInclude Include="deps\include\math\vector.h" />
@@ -178,6 +194,8 @@
     <ClInclude Include="deps\include\tools\mem_tools.h" />
     <ClInclude Include="deps\include\tools\netvars.h" />
     <ClInclude Include="deps\include\tools\platform_folders.h" />
+    <ClInclude Include="src\features\menu\menu.h" />
+    <ClInclude Include="src\features\menu\widgets.h" />
     <ClInclude Include="src\game_sdk\entitys\c_base_entity.h" />
     <ClInclude Include="src\game_sdk\entitys\c_base_player.h" />
     <ClInclude Include="src\game_sdk\entitys\entitys.h" />
