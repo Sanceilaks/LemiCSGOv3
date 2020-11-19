@@ -16,7 +16,8 @@ typedef void* ConCommandBase;
 typedef void* ConVar;
 typedef void* ConCommand;
 typedef void* FnChangeCallback_t;
-typedef void* Color;
+
+class Color;
 
 class ICvar : public IAppSystem
 {

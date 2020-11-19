@@ -5,23 +5,25 @@
 #include <fstream>
 #include <logger.h>
 #include <thread>
-
+#include <game_sdk/misc/color.h>
 #include "interfaces.h"
 
 HMODULE g_dll;
 
+#define SL_LINK "SL#2200"
+#define ZERT_MARK_LINK "ZertMARK#9934"
 
 void init()
-{
-	//logger::init();
-	
-	using namespace std::chrono_literals;
+{	
 	if (!hack_core->init())
 		fprintf(stderr, "hack_core::init error!\n");
 
-	interfaces->cvar->console_printf("Hello from csgo console! Test int is -> %i", 666);
-	
-	//FreeLibraryAndExitThread(g_dll, 0);
+
+	//All done message
+	interfaces->engine->execute_client_cmd("clear");
+	interfaces->cvar->console_color_printf(Color(255, 0, 0), "LemiCSGO is injected!\n\tCreated by:\n");
+	interfaces->cvar->console_color_printf(Color(0, 255, 0), "SL %s\t", SL_LINK);
+	interfaces->cvar->console_color_printf(Color(0, 0, 255), "ZertMARK %s\n", ZERT_MARK_LINK);
 }
 
 

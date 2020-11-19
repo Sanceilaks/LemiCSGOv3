@@ -1,11 +1,9 @@
 #pragma once
-//#include <game_sdk/classes/c_client_class.h>
+#include <game_sdk/misc/c_client_class.h>
 
 /*
 666
 */
-
-class ClientClass;
 
 class VBaseClient
 {

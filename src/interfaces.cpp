@@ -6,8 +6,6 @@
 
 Interfaces* interfaces = new Interfaces();
 
-typedef unsigned int DWORD;
-
 void Interfaces::init()
 {
 	engine = static_cast<IVEngineClient*>(mem_tools::capture_interface("engine.dll", "VEngineClient014"));
