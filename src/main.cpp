@@ -19,7 +19,9 @@ void init()
 	if (!hack_core->init())
 		fprintf(stderr, "hack_core::init error!\n");
 
-	FreeLibraryAndExitThread(g_dll, 0);
+	interfaces->cvar->console_printf("Hello from csgo console! Test int is -> %i", 666);
+	
+	//FreeLibraryAndExitThread(g_dll, 0);
 }
 
 

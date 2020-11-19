@@ -89,7 +89,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\VSP\cpp\LemiCSGOv3\deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)deps\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +150,8 @@
     <ClCompile Include="deps\include\minhook\hook.c" />
     <ClCompile Include="deps\include\minhook\trampoline.c" />
     <ClCompile Include="deps\include\tools\mem_tools.cpp" />
+    <ClCompile Include="src\game_sdk\misc\checksum_crc.cpp" />
+    <ClCompile Include="src\hook\hooks\create_move.cpp" />
     <ClCompile Include="src\hook\hooks_manager.cpp" />
     <ClCompile Include="src\interfaces.cpp" />
     <ClCompile Include="src\hack_core.cpp" />
@@ -157,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="deps\include\math\math.h" />
+    <ClInclude Include="deps\include\math\qangle.h" />
     <ClInclude Include="deps\include\math\vector.h" />
     <ClInclude Include="deps\include\math\vector2d.h" />
     <ClInclude Include="deps\include\math\vector3d.h" />
@@ -169,12 +172,18 @@
     <ClInclude Include="deps\include\minhook\minhook.h" />
     <ClInclude Include="deps\include\minhook\trampoline.h" />
     <ClInclude Include="deps\include\tools\mem_tools.h" />
-    <ClInclude Include="src\game_interfaces\i_panel.h" />
-    <ClInclude Include="src\game_interfaces\v_client_entity_list.h" />
-    <ClInclude Include="src\game_interfaces\v_debug_overlay.h" />
+    <ClInclude Include="src\game_sdk\interfaces\i_app_system.h" />
+    <ClInclude Include="src\game_sdk\interfaces\i_client_mode.h" />
+    <ClInclude Include="src\game_sdk\interfaces\i_cvar.h" />
+    <ClInclude Include="src\game_sdk\interfaces\i_panel.h" />
+    <ClInclude Include="src\game_sdk\interfaces\v_base_client.h" />
+    <ClInclude Include="src\game_sdk\interfaces\v_client_entity_list.h" />
+    <ClInclude Include="src\game_sdk\interfaces\v_debug_overlay.h" />
+    <ClInclude Include="src\game_sdk\misc\checksum_crc.h" />
+    <ClInclude Include="src\game_sdk\misc\c_user_cmd.h" />
     <ClInclude Include="src\hook\hooks_manager.h" />
     <ClInclude Include="src\interfaces.h" />
-    <ClInclude Include="src\game_interfaces\engine_client.h" />
+    <ClInclude Include="src\game_sdk\interfaces\engine_client.h" />
     <ClInclude Include="src\hack_core.h" />
     <ClInclude Include="deps\include\logger.h" />
   </ItemGroup>
