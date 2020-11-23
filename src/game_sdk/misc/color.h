@@ -1,5 +1,5 @@
 #pragma once
-//#include <imgui/imgui.h>
+#include <imgui/imgui.h>
 #pragma warning( push )
 #pragma warning( disable : 4244) //4244
 
@@ -28,11 +28,20 @@ public:
 	{
 		set_color(_r, _g, _b, _a);
 	}
-	Color(float col_arr[3])
-	{
-		set_color(col_arr[0] * 255, col_arr[1] * 255, col_arr[2] * 255);
-	}
+	
+	//Color(float col_arr[3])
+	//{
+	//	set_color(col_arr[0] * 255, col_arr[1] * 255, col_arr[2] * 255);
+	//}
 
+	Color(float arr[4])
+	{
+		if (arr[0] > 1.f || arr[1] > 1.f || arr[2] > 1.f || arr[3] > 1.f)
+			set_color(arr[0], arr[1], arr[2], arr[3]);
+		else
+			set_color(arr[0] * 255, arr[1] * 255, arr[2] * 255, arr[3] * 255);
+	}
+	
 	// set the color
 	// r - red component (0-255)
 	// g - green component (0-255)
@@ -58,12 +67,12 @@ public:
 		*((int*)this) = color32;
 	}
 
-	//ImU32 GetU32()
-	//{
-	//	return ((_color[3] & 0xff) << 24) + ((_color[2] & 0xff) << 16) + ((_color[1] & 0xff) << 8)
-	//		+ (_color[0] & 0xff);
-	//	//return (ImU32)(((_color[3] & 0xff) << 24) + ((_color[0] & 0xff) << 16) + ((_color[1] & 0xff) << 8) + (_color[2] & 0xff));
-	//}
+	ImU32 get_u32()
+	{
+		return ((_color[3] & 0xff) << 24) + ((_color[2] & 0xff) << 16) + ((_color[1] & 0xff) << 8)
+			+ (_color[0] & 0xff);
+		//return (ImU32)(((_color[3] & 0xff) << 24) + ((_color[0] & 0xff) << 16) + ((_color[1] & 0xff) << 8) + (_color[2] & 0xff));
+	}
 
 	int get_raw_color() const
 	{

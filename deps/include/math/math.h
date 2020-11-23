@@ -1,6 +1,7 @@
 #pragma once
 
-#include "vector.h" 
+#include "vector.h"
+#include "vmatrix.h"
 #include <algorithm>
 
 #ifndef LAPI
@@ -10,6 +11,19 @@
 
 namespace math
 {
+	struct box
+	{
+		float x, y, w, h;
+		box() = default;
+		box(float x, float y, float w, float h)
+		{
+			this->x = x;
+			this->y = y;
+			this->w = w;
+			this->h = h;
+		}
+	};
+	
 	static float PI_F = 3.14159265358979323846f;
 	static double PI_D = 3.14159265358979323846;
 
@@ -47,4 +61,7 @@ namespace math
 		#endif
 		return std::min(std::max(in, low), high);
 	}
+
+	bool world_to_screen(const Vector& in, Vector& out);
+	bool screen_transform(const Vector& in, Vector& out);
 }

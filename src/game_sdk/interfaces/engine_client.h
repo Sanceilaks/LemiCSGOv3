@@ -5,7 +5,7 @@
 
 #include <d3d9.h>
 
-typedef void* matrix3x4_t; //TODO: FIX THIS
+#include "math/vmatrix.h"
 
 typedef struct player_info_s {
 	int64_t __pad0;

@@ -3,7 +3,7 @@
 #include "math/qangle.h"
 #include "math/vector3d.h"
 
-typedef void* matrix3x4_t; //TODO: FIX THIS!!!!!!!!!!!!!!!!!!!!
+#include "math/vmatrix.h"
 
 typedef unsigned short ClientShadowHandle_t;
 typedef unsigned short ClientRenderHandle_t;

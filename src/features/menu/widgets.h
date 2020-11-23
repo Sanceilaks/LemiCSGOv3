@@ -7,7 +7,7 @@
 
 namespace ImGui
 {
-	static float ANIM_SPEED = 0.08f;
+	static float ANIM_SPEED = 0.009f;
 	
 	IMGUI_API bool RoundedButtonEx(const char* label, const ImVec2& size_args, float rounding, ImGuiButtonFlags flags);
 	IMGUI_API bool RoundedButton(const char* label, float rounding = 2.f, const ImVec2& size = ImVec2(0, 0));

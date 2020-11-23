@@ -14,7 +14,7 @@ void HooksManager::init()
 	hooks::create_move_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->client_mode, hooks::create_move_hook::index));
 	hooks::end_scane_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->direct_device, hooks::end_scane_hook::index));
 	hooks::reset_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->direct_device, hooks::reset_hook::index));
-	
+	hooks::override_view_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->client_mode, hooks::override_view_hook::index));
 	
 	if (MH_Initialize() != MH_OK)
 	{
@@ -34,6 +34,11 @@ void HooksManager::init()
 	if (MH_CreateHook(hooks::reset_hook::target, &hooks::reset_hook::hook, reinterpret_cast<void**>(&hooks::reset_hook::original)) != MH_OK)
 	{
 		throw std::exception("Failed to hook reset_hook");
+	}
+
+	if (MH_CreateHook(hooks::override_view_hook::target, &hooks::override_view_hook::hook, reinterpret_cast<void**>(&hooks::override_view_hook::original)) != MH_OK)
+	{
+		throw std::exception("Failed to hook override_view_hook");
 	}
 	
 	MH_EnableHook(MH_ALL_HOOKS);

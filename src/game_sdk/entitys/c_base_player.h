@@ -34,3 +34,13 @@ inline static CBasePlayer* get_local_player()
 {
 	return static_cast<CBasePlayer*>(interfaces->entity_list->get_entity_by_index(interfaces->engine->get_local_player()));
 }
+
+inline static CBasePlayer* get_player_by_index(int index)
+{
+	return static_cast<CBasePlayer*>(interfaces->entity_list->get_entity_by_index(index));
+}
+
+inline static CBasePlayer* get_player_by_handle(uintptr_t handle)
+{
+	return static_cast<CBasePlayer*>(interfaces->entity_list->get_entity_by_handle(handle));
+}
