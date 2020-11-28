@@ -11,7 +11,7 @@ public:
 	Vector(float _x, float _y, float _z);
 	Vector(float* clr);
 
-	void init(float _x, float _y, float _z);
+	void init(float _x = 0.f, float _y = 0.f, float _z = 0.f);
 	
 	bool is_valid() const;
 	void invalidate();
@@ -32,6 +32,10 @@ public:
 
 	float length();
 	float length2d();
+	float length_sqr() const
+	{
+		return (x * x + y * y + z * z);
+	}
 	
 	float distance(const Vector& to);
 	
@@ -47,5 +51,11 @@ public:
 	Vector operator*(float to);
 	Vector operator/(const Vector& other) const;
 	Vector operator/(float to);
-	
+	Vector operator*=(float f)
+	{
+		x *= f;
+		y *= f;
+		z *= f;
+		return *this;
+	}
 };

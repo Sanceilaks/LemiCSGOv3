@@ -2,6 +2,7 @@
 #include <game_sdk/interfaces/i_client_mode.h>
 #include <game_sdk/misc/c_user_cmd.h>
 #include <d3d9.h>
+#include <interfaces.h>
 
 #include <game_sdk/misc/c_view_setup.h>
 
@@ -46,6 +47,17 @@ namespace hooks
 
 		using fn = void(__thiscall*)(IClientMode*, CViewSetup*);
 		static void __stdcall hook(CViewSetup* view);
+
+		static inline fn original;
+		static inline void* target;
+	};
+
+	struct lock_cursor_hook
+	{
+		static const unsigned int index = 67;
+
+		using fn = void(__thiscall*)(ISurface*);
+		static void __stdcall hook();
 
 		static inline fn original;
 		static inline void* target;

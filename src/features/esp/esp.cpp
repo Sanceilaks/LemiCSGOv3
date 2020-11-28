@@ -27,9 +27,14 @@ bool is_entity_valid(CBaseEntity* entity)
 	if (entity == local_player || !ply->is_alive())
 		return false;
 
-	//if (entity->team_num() == local_player->team_num())
-	//	return false;
+	if (settings::esp::team_check)
+		if (entity->team_num() == local_player->team_num())
+			return false;
 
+	if (settings::esp::only_visible)
+		if (!local_player->is_sees(ply))
+			return false;
+	
 	return true;
 }
 
@@ -91,8 +96,22 @@ bool get_player_box(CBasePlayer* ent, math::box& box_in)	//pasted from unknown s
 
 void draw_box(CBasePlayer* ent, math::box box)
 {
-	Color col = Color(settings::esp::visible_color); /*ent->is_visible(CBasePlayer::get_local_player()) ? Color(G::get().player->visible_color) : Color(G::get().player->unvisible_color);*/
-	render->draw_list->AddRect (ImVec2(box.x, box.y), ImVec2(box.x + box.w, box.y + box.h), col.get_u32());
+	Color col = get_local_player()->is_sees(ent) ? Color(settings::esp::visible_color) : Color(settings::esp::invisible_color);
+
+	if (settings::esp::box_type == settings::esp::flat)
+	{
+		render->draw_list->AddRect(ImVec2(box.x, box.y), ImVec2(box.x + box.w, box.y + box.h), col.get_u32(), 0, ImDrawCornerFlags_All, 2);
+	}
+	else if (settings::esp::box_type == settings::esp::bounding)
+	{
+		render->draw_list->AddRect(ImVec2(box.x - 1.f, box.y - 1.f), ImVec2(box.x + box.w + 1.f, box.y + box.h + 1.f), Color(0, 0, 0).get_u32(), 0, ImDrawCornerFlags_All, 1);
+
+		render->draw_list->AddRect(ImVec2(box.x, box.y), ImVec2(box.x + box.w, box.y + box.h), col.get_u32(), 0, ImDrawCornerFlags_All, 2);
+	}
+	else if (settings::esp::box_type == settings::esp::corners)
+	{
+		render->draw_list->AddRect(ImVec2(box.x, box.y), ImVec2(box.x + box.w, box.y + box.h), col.get_u32(), 10.f, ImDrawCornerFlags_All, 2);
+	}
 }
 
 void Esp::draw()

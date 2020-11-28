@@ -91,7 +91,10 @@ void draw_visuals()
 	ImGui::BeginGroupPanel("ESP", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
 	
 	ImGui::ToggleButton("Enable##espbox", &settings::esp::enabled, ImVec2(45, 20));
-
+	ImGui::ToggleButton("Team check##espbox", &settings::esp::team_check, ImVec2(45, 20));
+	ImGui::ToggleButton("Only visible##espbox", &settings::esp::only_visible, ImVec2(45, 20));
+	ImGui::Combo("Box type##espbox", &settings::esp::box_type, settings::esp::box_types, 3);
+	
 	ImGui::EndGroupPanel();
 }
 
@@ -105,7 +108,9 @@ void draw_color()
 	ImGui::BeginGroupPanel("ESP", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
 
 	ImGui::ColorEdit4("Visible##espbox", settings::esp::visible_color, COLOR_EDIT_FLAGS);
-
+	ImGui::SameLine();
+	ImGui::ColorEdit4("Invisible##espbox", settings::esp::invisible_color, COLOR_EDIT_FLAGS);
+	
 	ImGui::EndGroupPanel();
 
 	

@@ -6,8 +6,8 @@
 class CBaseEntity : public IClientEntity
 {
 public:
-	NETVAR("CBaseEntity", "m_nModelIndex", get_model_index, int32_t);
-	NETVAR("CBaseEntity", "m_iTeamNum", team_num, int);
+	NETVAR("DT_BaseEntity", "m_nModelIndex", get_model_index, int32_t);
+	NETVAR("DT_BaseEntity", "m_iTeamNum", team_num, int);
 	
 	bool is_player()
 	{

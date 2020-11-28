@@ -1,5 +1,6 @@
 #pragma once
 #include "c_base_entity.h"
+#include "game_sdk/interfaces/i_engine_trace.h"
 
 
 enum EEntityFlag
@@ -25,8 +26,55 @@ public:
 	NETVAR("DT_BasePlayer", "m_lifeState", get_life_state, bool);
 	NETVAR("DT_CSPlayer", "m_bIsScoped", is_scoped, bool);
 	NETVAR("CBasePlayer", "m_vecVelocity[0]", get_velocity, Vector);
+	NETVAR("DT_BaseEntity", "m_vecOrigin", get_origin, Vector);
+	NETVAR("DT_BasePlayer", "m_vecViewOffset[0]", get_view_offset, Vector);
+
+	inline Vector get_eye_pos()
+	{
+		return this->get_origin() + this->get_view_offset();
+	}
 	
 	inline bool is_alive() { return this->get_life_state() == 0; }
+
+	bool is_sees(CBasePlayer* hit)
+	{
+		Ray_t ray;
+		trace_t tr;
+		CTraceFilter filter;
+		filter.pSkip = this;
+
+		Vector eye_pos = this->get_eye_pos();
+		Vector end_pos = hit->get_eye_pos();
+
+		ray.init(eye_pos, end_pos);
+
+		interfaces->engine_trace->trace_ray(ray, MASK_SHOT | CONTENTS_GRATE, &filter, &tr);
+
+
+		if (tr.hit_entity == hit || tr.fraction >= 0.98f)
+			return true;
+		return false;
+	}
+
+	bool is_sees(CBasePlayer* hit, Vector pos)
+	{
+		Ray_t ray;
+		trace_t tr;
+		CTraceFilter filter;
+		filter.pSkip = this;
+
+		Vector eye_pos = this->get_eye_pos();
+		Vector end_pos = pos;
+
+		ray.init(eye_pos, end_pos);
+
+		interfaces->engine_trace->trace_ray(ray, MASK_SHOT | CONTENTS_GRATE, &filter, &tr);
+
+
+		if (tr.hit_entity == hit || tr.fraction >= 0.98f)
+			return true;
+		return false;
+	}
 };
 
 
