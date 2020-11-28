@@ -27,6 +27,7 @@ LRESULT STDMETHODCALLTYPE my_wndproc(HWND window, UINT message_type, WPARAM w_pa
 
     if (ImGui_ImplWin32_WndProcHandler(window, message_type, w_param, l_param) && menu->open)
     {
+        interfaces->surface->unlock_cursor();
         return true;
     }
     return CallWindowProc(wnd_proc, window, message_type, w_param, l_param);

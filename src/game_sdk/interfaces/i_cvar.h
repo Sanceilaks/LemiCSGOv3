@@ -11,9 +11,42 @@ public:
     virtual void d_print(const char* pMessage) = 0;
 };
 
+
+class ConVar {
+public:
+    float get_float()
+	{
+        using fn = float(__thiscall*)(ConVar*);
+        return (*(fn**)this)[12](this);
+    }
+
+    int get_int()
+	{
+        using fn = int(__thiscall*)(ConVar*);
+        return (*(fn**)this)[13](this);
+    }
+
+    void set_value(int value)
+	{
+        using fn = void(__thiscall*)(ConVar*, int);
+        return (*(fn**)this)[16](this, value);
+    }
+
+    void set_value(float value)
+    {
+        using fn = void(__thiscall*)(ConVar*, float);
+        return (*(fn**)this)[15](this, value);
+    }
+
+	void set_value(const char* value)
+    {
+        using fn = void(__thiscall*)(ConVar*, const char*);
+        return (*(fn**)this)[14](this, value);
+    }
+};
+
 typedef void* CVarDLLIdentifier_t;
 typedef void* ConCommandBase;
-typedef void* ConVar;
 typedef void* ConCommand;
 typedef void* FnChangeCallback_t;
 

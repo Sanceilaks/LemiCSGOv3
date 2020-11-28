@@ -117,6 +117,9 @@
     <ClCompile Include="src\settings\settings.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="deps\include\math\vector2d.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hack_core.h">
@@ -306,6 +309,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\settings\settings.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_sdk\interfaces\i_surface.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

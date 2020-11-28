@@ -16,6 +16,6 @@ void Fonts::init()
 
 	ImGuiIO& io = ImGui::GetIO(); //Segoeuib.ttf
 	
-	segoe_ui = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Segoeuib.ttf", 14, NULL, io.Fonts->GetGlyphRangesCyrillic());
-	
+	segoe_ui = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Segoeuib.ttf", 14.f, NULL, io.Fonts->GetGlyphRangesCyrillic());
+	arial_menu = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 35.f, NULL, io.Fonts->GetGlyphRangesCyrillic());
 }

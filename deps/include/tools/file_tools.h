@@ -19,5 +19,5 @@ namespace file_tools
 	LAPI void read_file(std::string& out, const std::string& path);
 
 	LAPI std::string get_hack_directory();
-	LAPI std::filesystem::path& get_hack_directory_path();
+	LAPI std::filesystem::path get_hack_directory_path();
 }

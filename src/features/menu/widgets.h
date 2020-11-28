@@ -3,7 +3,7 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
-
+#include <game_sdk/misc/color.h>
 
 namespace ImGui
 {
@@ -13,4 +13,9 @@ namespace ImGui
 	IMGUI_API bool RoundedButton(const char* label, float rounding = 2.f, const ImVec2& size = ImVec2(0, 0));
 
 	IMGUI_API void ToggleButton(const char* str_id, bool* v, const ImVec2& size = ImVec2(0, 0));
+
+	IMGUI_API bool MenuButton(const char* label, const ImVec2& size_args, const ImVec2& pos, Color color, Color text_color, ImFont* font);
+
+	IMGUI_API void BeginGroupPanel(const char* label, const ImVec2& size = ImVec2(-1.f, -1.f), Color bg_color = Color(0, 0, 0), Color text_bg_color = Color(0, 0, 0));
+	IMGUI_API void EndGroupPanel();
 }

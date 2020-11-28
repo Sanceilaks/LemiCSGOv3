@@ -150,6 +150,7 @@
     <ClCompile Include="deps\include\imgui\impl\imgui_impl_win32.cpp" />
     <ClCompile Include="deps\include\logger.cpp" />
     <ClCompile Include="deps\include\math\math.cpp" />
+    <ClCompile Include="deps\include\math\vector2d.cpp" />
     <ClCompile Include="deps\include\math\vector3d.cpp" />
     <ClCompile Include="deps\include\math\vmatrix.cpp" />
     <ClCompile Include="deps\include\minhook\buffer.c" />
@@ -222,6 +223,7 @@
     <ClInclude Include="src\game_sdk\interfaces\i_client_unknown.h" />
     <ClInclude Include="src\game_sdk\interfaces\i_cvar.h" />
     <ClInclude Include="src\game_sdk\interfaces\i_panel.h" />
+    <ClInclude Include="src\game_sdk\interfaces\i_surface.h" />
     <ClInclude Include="src\game_sdk\interfaces\v_base_client.h" />
     <ClInclude Include="src\game_sdk\interfaces\v_client_entity_list.h" />
     <ClInclude Include="src\game_sdk\interfaces\v_debug_overlay.h" />

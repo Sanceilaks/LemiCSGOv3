@@ -1,7 +1,11 @@
 #pragma once
-#include <imgui/imgui.h>
+
 #pragma warning( push )
 #pragma warning( disable : 4244) //4244
+
+
+#include <imgui/imgui.h>
+
 
 enum Colors
 {
@@ -27,6 +31,10 @@ public:
 	Color(int _r, int _g, int _b, int _a)
 	{
 		set_color(_r, _g, _b, _a);
+	}
+	Color (const ImVec4& vec4 )
+	{
+		set_color(vec4.x * 255, vec4.y * 255, vec4.z * 255, vec4.w * 255);
 	}
 	
 	//Color(float col_arr[3])

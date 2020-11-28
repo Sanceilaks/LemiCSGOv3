@@ -46,10 +46,16 @@ std::string file_tools::get_hack_directory()
 	if (!exist(path.generic_string()))
 		create_directory(path);
 
+	auto data_path = path;
+	data_path.append("data");
+	
+	if (!exist(data_path.generic_string()))
+		create_directory(data_path);
+	
 	return path.generic_string();
 }
 
-std::filesystem::path& file_tools::get_hack_directory_path()
+std::filesystem::path file_tools::get_hack_directory_path()
 {
 	auto documents = sago::getDocumentsFolder();
 	filesystem::path path(documents);
@@ -58,5 +64,11 @@ std::filesystem::path& file_tools::get_hack_directory_path()
 	if (!exist(path.generic_string()))
 		create_directory(path);
 
+	auto data_path = path;
+	data_path.append("data");
+
+	if (!exist(data_path.generic_string()))
+		create_directory(data_path);
+	
 	return path;
 }

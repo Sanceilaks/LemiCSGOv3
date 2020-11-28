@@ -11,11 +11,12 @@ void set_std_imstyle()
     style->WindowRounding = 0.0f;
     style->ChildRounding = 0.3f;
     style->WindowMinSize = ImVec2(900, 510);
-
+    style->WindowPadding = ImVec2(10, 10);
+	
     colors[ImGuiCol_Text] = ImVec4(0.70f, 1.00000f, 0.98f, 1.00f);
     colors[ImGuiCol_TextDisabled] = ImVec4(0.152f, 0.247f, 0.243f, 1.00f);
     colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.07f, 0.07f, 1.00f);
-    colors[ImGuiCol_ChildBg] = ImVec4(0.211f, 0.227f, 0.215f, 0.00f);
+    colors[ImGuiCol_ChildBg] = ImVec4(0.12549f, 0.12549f, 0.12549f, 1.00f);
     colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
     colors[ImGuiCol_Border] = ImVec4(0.007f, 0.105f, 0.352f, 0.80f);
     colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);

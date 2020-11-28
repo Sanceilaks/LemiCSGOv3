@@ -1,6 +1,6 @@
 #include "render.h"
 
-
+#include <tools/file_tools.h>
 
 Render* render = new Render();
 
@@ -12,6 +12,8 @@ bool load_texture_from_file(const char* filename, PDIRECT3DTEXTURE9* out_texture
     HRESULT hr = D3DXCreateTextureFromFileA(render->device, filename, &texture);
     if (hr != S_OK)
         return false;
+
+    
 	
     // Retrieve description of the texture surface so we can access its size
     D3DSURFACE_DESC my_image_desc;
@@ -28,5 +30,8 @@ void Render::init(IDirect3DDevice9* device)
 
     this->device = device;
 
-    bool r = load_texture_from_file("D:\\Admin\\Pictures\\morgen.jpeg", &img.texture, &img.w, &img.h);
+    auto hack_directory_path = file_tools::get_hack_directory_path();
+    hack_directory_path.append("data\\logo_mini.png");
+	
+    load_texture_from_file(hack_directory_path.string().c_str(), &logo_mini.texture, &logo_mini.w, &logo_mini.h);
 }

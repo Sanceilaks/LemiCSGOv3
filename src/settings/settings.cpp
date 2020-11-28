@@ -5,6 +5,6 @@ namespace settings
 	namespace esp
 	{
 		bool enabled = true;
-		float visible_color[4] = {255, 0, 0, 255};
+		float visible_color[4] = {0, 0, 0, 1};
 	}
 }

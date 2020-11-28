@@ -1,9 +1,8 @@
 #pragma once
-#include <math/q_angle.h>
-#include <math/vector2d.h>
-#include <game_sdk/classes/color.h>
+#include <math/math.h>
+#include <game_sdk/misc/color.h>
 
-typedef ULONG HFont;
+typedef unsigned long HFont;
 typedef unsigned int VPANEL;
 
 
@@ -25,17 +24,17 @@ struct IntRect {
 
 struct vertex_t {
     vertex_t() {}
-    vertex_t(const Math::CVector2D& pos, const Math::CVector2D& coord = Math::CVector2D(0, 0)) {
+    vertex_t(const Vector2D& pos, const Vector2D& coord = Vector2D(0, 0)) {
         m_Position = pos;
         m_TexCoord = coord;
     }
-    void init(const Math::CVector2D& pos, const Math::CVector2D& coord = Math::CVector2D(0, 0)) {
+    void init(const Vector2D& pos, const Vector2D& coord = Vector2D(0, 0)) {
         m_Position = pos;
         m_TexCoord = coord;
     }
 
-    Math::CVector2D m_Position;
-    Math::CVector2D m_TexCoord;
+    Vector2D m_Position;
+    Vector2D m_TexCoord;
 };
 
 enum class FontFeature {

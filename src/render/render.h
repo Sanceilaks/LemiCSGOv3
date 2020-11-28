@@ -15,7 +15,7 @@ class Render
 public:
 	ImDrawList* draw_list = nullptr;
 	IDirect3DDevice9* device = nullptr;
-	t_limage img;
+	t_limage logo_mini;
 	
 	void init(IDirect3DDevice9* device);
 	
