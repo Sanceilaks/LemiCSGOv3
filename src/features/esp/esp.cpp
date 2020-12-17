@@ -32,8 +32,11 @@ bool is_entity_valid(CBaseEntity* entity)
 			return false;
 
 	if (settings::esp::only_visible)
-		if (!local_player->is_sees(ply))
+	{
+		if (!local_player->is_sees_foreach_bone(ply))
 			return false;
+	}
+
 	
 	return true;
 }
@@ -96,7 +99,7 @@ bool get_player_box(CBasePlayer* ent, math::box& box_in)	//pasted from unknown s
 
 void draw_box(CBasePlayer* ent, math::box box)
 {
-	Color col = get_local_player()->is_sees(ent) ? Color(settings::esp::visible_color) : Color(settings::esp::invisible_color);
+	Color col = get_local_player()->is_sees_foreach_bone(ent) ? Color(settings::esp::visible_color) : Color(settings::esp::invisible_color);
 
 	if (settings::esp::box_type == settings::esp::flat)
 	{
@@ -105,13 +108,46 @@ void draw_box(CBasePlayer* ent, math::box box)
 	else if (settings::esp::box_type == settings::esp::bounding)
 	{
 		render->draw_list->AddRect(ImVec2(box.x - 1.f, box.y - 1.f), ImVec2(box.x + box.w + 1.f, box.y + box.h + 1.f), Color(0, 0, 0).get_u32(), 0, ImDrawCornerFlags_All, 1);
-
+		render->draw_list->AddRect(ImVec2(box.x + 1.f, box.y + 1.f), ImVec2(box.x + box.w - 1.f, box.y + box.h - 1.f), Color(0, 0, 0).get_u32(), 0, ImDrawCornerFlags_All, 1);
+		
 		render->draw_list->AddRect(ImVec2(box.x, box.y), ImVec2(box.x + box.w, box.y + box.h), col.get_u32(), 0, ImDrawCornerFlags_All, 2);
 	}
 	else if (settings::esp::box_type == settings::esp::corners)
 	{
 		render->draw_list->AddRect(ImVec2(box.x, box.y), ImVec2(box.x + box.w, box.y + box.h), col.get_u32(), 10.f, ImDrawCornerFlags_All, 2);
 	}
+	//else if (settings::esp::box_type == settings::esp::angular)
+	//{
+	//	
+	//	//render->draw_list->AddRectFilled();
+	//}
+}
+
+void draw_health(CBasePlayer* ent, math::box box)
+{
+	if (ent->is_alive())
+	{
+		auto health = std::clamp(ent->get_health(), 0, 100);
+		auto pos = ImVec2(box.x - 6.f, box.y);
+
+		math::box void_box {pos.x, pos.y, 3, box.h};
+		math::box health_box {void_box};
+
+		health_box.h = health * void_box.h / 100;
+		health_box.y = void_box.y + void_box.h - health_box.h;
+
+		render->draw_list->AddRectFilled(ImVec2(void_box.x, void_box.y), ImVec2(void_box.x + void_box.w, void_box.y + void_box.h), Color(settings::esp::void_health_color).get_u32());
+		render->draw_list->AddRectFilled(ImVec2(health_box.x, health_box.y), ImVec2(health_box.x + health_box.w, health_box.y + health_box.h), Color(settings::esp::health_color).get_u32());
+	}
+}
+
+void draw_name(CBasePlayer* ent, math::box box)
+{
+	auto text_size = ImGui::CalcTextSize(ent->get_player_name().c_str());
+	auto pos = ImVec2(box.x + (box.w * 0.5f - text_size.x * 0.5f), box.y - text_size.y * 1.25f);
+
+	
+	render->draw_list->AddTextOutlined(pos, Color(255, 255, 255).get_u32(), Color(0, 0, 0).get_u32(), ent->get_player_name().c_str());
 }
 
 void Esp::draw()
@@ -122,9 +158,9 @@ void Esp::draw()
 	if (!settings::esp::enabled)
 		return;
 	
-	for (auto i = 1; i <= interfaces->engine->get_max_clients(); ++i)
+	for (auto i = 0; i <= interfaces->gvars->max_clients; ++i)
 	{
-		CBaseEntity* ent = get_entity_by_index(i);
+		CBasePlayer* ent = get_player_by_index(i);
 
 		if (!is_entity_valid(ent))
 			continue;
@@ -132,8 +168,33 @@ void Esp::draw()
 		math::box box;
 
 		if (!get_player_box(static_cast<CBasePlayer*>(ent), box))
-			continue;;
+			continue;
 
+		if (!is_entity_valid(ent))
+			continue;
+		
 		draw_box(static_cast<CBasePlayer*>(ent), box);
+
+		if (settings::esp::draw_name)
+			draw_name(static_cast<CBasePlayer*>(ent), box);
+
+		if (settings::esp::draw_health)
+			draw_health(static_cast<CBasePlayer*>(ent), box);
+
+		//if (settings::esp::draw_bone_ids)
+		//{
+		//	Vector ASD;
+		//	Vector screen_head;
+		//	if (math::world_to_screen(ent->get_entity_bone(HEAD_0), screen_head))
+		//	{
+		//		Vector start_bone;
+		//		for (auto b = 0; b < 128; b++)
+		//		{
+		//			char id[MAX_PATH];
+		//			sprintf(id, "%d", b);
+		//			render->draw_list->AddTextOutlined()
+		//		}
+		//	}
+		//}
 	}
 }

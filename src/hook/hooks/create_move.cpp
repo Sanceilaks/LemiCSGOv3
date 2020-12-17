@@ -7,6 +7,10 @@
 
 #include "game_sdk/entitys/c_base_player.h"
 
+#include <features/legitbot/legitbot.h>
+#include <features/prediction_system/prediction_system.h>
+
+
 void bhop(CUserCmd* cmd)
 {
     //if (!settings::Misc->bhop_enable)
@@ -92,9 +96,23 @@ bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
 	if (!local_player)
 		return false;
 
-    bhop(ucmd);
-    auto_strafe(ucmd);
+	//move
+    {
+        bhop(ucmd);
+        auto_strafe(ucmd);
+    }
 
+    prediction_system->start(ucmd);
+    {
+        legit_bot->run(ucmd);
+
+		
+    }
+    prediction_system->end();
+
+    ucmd->viewangles.clamp();
+
+    interfaces->engine->set_viewangles(ucmd->viewangles);
 	
 	return false;
 }

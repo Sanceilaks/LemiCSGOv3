@@ -111,3 +111,44 @@ bool math::screen_transform(const Vector& in, Vector& out)	//pasted from Sensum 
 		return false;
 	}
 }
+
+void math::normalize_angles(Vector& angles)
+{
+	while (angles.x > 89.0f)
+		angles.x -= 180.0f;
+
+	while (angles.x < -89.0f)
+		angles.x += 180.0f;
+
+	while (angles.y < -180.0f)
+		angles.y += 360.0f;
+
+	while (angles.y > 180.0f)
+		angles.y -= 360.0f;
+
+	angles.z = 0.0f;
+}
+
+Vector math::calc_angle(const Vector& from, const Vector& to)
+{
+	Vector angles;
+
+	Vector delta = from - to;
+	float hyp = delta.length2d();
+
+	angles.y = std::atanf(delta.y / delta.x) * 57.295779513082f; //Magic number
+	angles.x = std::atanf(-delta.z / hyp) * - 57.295779513082f;
+	angles.z = 0.0f;
+
+	if (delta.x >= 0.0f)
+		angles.y += 180.0f;
+
+	return angles;
+}
+
+float math::get_fov(const Vector& from, const Vector& to)
+{
+	Vector delta = to - from;
+	normalize_angles(delta);
+	return sqrtf(powf(delta.x, 2.f) + powf(delta.y, 2.f));
+}

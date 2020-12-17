@@ -47,6 +47,36 @@ public:
 		Init(clr[0], clr[1], clr[2]);
 	}
 
+	float x() const
+	{
+		return pitch;
+	}
+
+	float y() const
+	{
+		return yaw;
+	}
+
+	float z() const
+	{
+		return roll;
+	}
+
+	void x(float v)
+	{
+		pitch = v;
+	}
+
+	void y(float v)
+	{
+		yaw = v;
+	}
+
+	void z(float v)
+	{
+		roll = v;
+	}
+	
 	void Init(float ix = 0.0f, float iy = 0.0f, float iz = 0.0f)
 	{
 		pitch = ix;
@@ -237,6 +267,6 @@ inline static float normalize_angel(float angle)
 		else
 			angle = angle - 360.f * revolutions;
 	}
-
+	
 	return angle;
 }

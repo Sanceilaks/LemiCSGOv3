@@ -65,4 +65,18 @@ void set_std_imstyle()
     colors[ImGuiCol_ResizeGrip] = colors[ImGuiCol_WindowBg];
     colors[ImGuiCol_ResizeGripActive] = colors[ImGuiCol_ChildBg];
     colors[ImGuiCol_ResizeGripHovered] = colors[ImGuiCol_WindowBg];
+	
+    colors[ImGuiCol_Header] = ImVec4(0.125f, 0.125f, 0.125f, 0.7f);
+    colors[ImGuiCol_HeaderActive] = ImVec4(0.225f, 0.225f, 0.225f, 0.7f);
+	colors[ImGuiCol_HeaderHovered] = ImVec4(0.225f, 0.225f, 0.225f, 0.7f);
+	
+    colors[ImGuiCol_PopupBg] = ImVec4(0.125f, 0.125f, 0.125f, 0.7f);
+	
+	colors[ImGuiCol_FrameBg] = ImVec4(0.125f, 0.125f, 0.125f, 0.7f);
+	colors[ImGuiCol_FrameBgActive] = ImVec4(0.225f, 0.225f, 0.225f, 0.7f);
+	colors[ImGuiCol_FrameBgHovered] = ImVec4(0.225f, 0.225f, 0.225f, 0.7f);
+
+    colors[ImGuiCol_Button] = ImVec4(0.125f, 0.125f, 0.125f, 0.7f);
+    colors[ImGuiCol_ButtonHovered] = ImVec4(0.225f, 0.225f, 0.225f, 0.7f);
+    colors[ImGuiCol_ButtonActive] = ImVec4(0.225f, 0.225f, 0.225f, 0.7f);
 }

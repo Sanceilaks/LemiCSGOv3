@@ -1,6 +1,10 @@
 #include "overlay.h"
 #include <render/render.h>
 
+#include <settings/settings.h>
+
+#include "math/math.h"
+
 Overlay* overlay = new Overlay();
 
 void Overlay::draw()

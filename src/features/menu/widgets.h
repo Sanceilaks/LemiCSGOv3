@@ -18,4 +18,6 @@ namespace ImGui
 
 	IMGUI_API void BeginGroupPanel(const char* label, const ImVec2& size = ImVec2(-1.f, -1.f), Color bg_color = Color(0, 0, 0), Color text_bg_color = Color(0, 0, 0));
 	IMGUI_API void EndGroupPanel();
+	
+	IMGUI_API bool SizedCombo(const char* label, int* current_item, const char* const items[], int items_count, ImVec2 size, int height_in_items = -1);
 }

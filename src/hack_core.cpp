@@ -14,5 +14,6 @@ bool HackCore::init()
 	hooks_manager->init();
 	interfaces->cvar->console_color_printf(Color(0, 255, 0), "hooks_manager::init ok\n");
 	
+	
 	return true;
 }

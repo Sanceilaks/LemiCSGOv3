@@ -64,4 +64,9 @@ namespace math
 
 	bool world_to_screen(const Vector& in, Vector& out);
 	bool screen_transform(const Vector& in, Vector& out);
+
+	LAPI void normalize_angles(Vector& angles);
+	LAPI Vector calc_angle(const Vector& from, const Vector& to);
+	
+	LAPI float get_fov(const Vector& from, const Vector& to);
 }

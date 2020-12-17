@@ -11,8 +11,7 @@ public:
 	
 	bool is_player()
 	{
-		using original_fn = bool(__thiscall*)(void*);
-		return (*(original_fn**)this)[157](this);
+		return get_client_class()->class_id == ccsplayer; //eeeee best check
 	}
 
 	bool is_weapon()

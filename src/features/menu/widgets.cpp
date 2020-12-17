@@ -235,3 +235,12 @@ void ImGui::EndGroupPanel()
     ImGui::GetWindowDrawList()->AddRectFilled(itemMin, itemMax, g_bg_color.get_u32());
     ImGui::GetWindowDrawList()->ChannelsMerge();
 }
+
+bool ImGui::SizedCombo(const char* label, int* current_item, const char* const items[], int items_count, ImVec2 size,
+	int height_in_items)
+{
+    PushItemWidth(size.x);
+    const bool value_changed = Combo(label, current_item, items, items_count, height_in_items);
+    PopItemWidth();
+    return value_changed;
+}

@@ -10,6 +10,10 @@
 #include "game_sdk/interfaces/i_cvar.h"
 #include "game_sdk/interfaces/i_surface.h"
 #include "game_sdk/interfaces/i_engine_trace.h"
+#include "game_sdk/interfaces/c_global_vars.h"
+#include "game_sdk/interfaces/i_game_movement.h"
+#include "game_sdk/interfaces/i_move_helper.h"
+#include "game_sdk/interfaces/i_prediction.h"
 #include <d3d9.h>
 
 #pragma endregion 
@@ -29,6 +33,10 @@ public:
 	IDirect3DDevice9* direct_device;
 	ISurface* surface;
 	IEngineTrace* engine_trace;
+	CGlobalVars* gvars;
+	IGameMovement* game_movement;
+	IMoveHelper* move_helper;
+	IPrediction* prediction;
 	
 	void init();
 	void print_interfaces();

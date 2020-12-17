@@ -17,7 +17,7 @@ public:
 	virtual void					post_data_update(int updateType) = 0;
 	virtual void					__unkn(void) = 0;
 	/* 9 */ virtual bool			is_dormant(void) = 0;
-	/* 10 */ virtual int			ent_index(void) const = 0;
+	/* 10 */ virtual int			index(void) const = 0;
 	virtual void					receive_message(int classID, bf_read& msg) = 0;
 	virtual void* GetDataTableBasePtr() = 0;
 	/* 13 */ virtual void			set_destroyed_on_recreate_entities(void) = 0;
