@@ -1,4 +1,6 @@
 #include "legitbot.h"
+#include <settings/settings.h>
+
 
 LegitBot* legit_bot = new LegitBot();
 
@@ -16,14 +18,14 @@ auto LegitBot::get_target(CUserCmd* cmd) -> CBasePlayer*
 	{
 		auto ply = get_player_by_index(i);
 
-		if (!player_valid(ply))
+		if (!player_valid(ply, true, true))
 			continue;
 
 		Vector engine_angles;
 		interfaces->engine->get_viewangles(engine_angles);
 		float fov = math::get_fov(engine_angles, math::calc_angle(local_player->get_eye_pos(), ply->get_entity_bone(Bones::HEAD_0)));
 
-		if (fov < BEST_FOV)
+		if (fov < BEST_FOV && fov <= settings::legit_bot::fov)
 		{
 			BEST_FOV = fov;
 			target = ply;
@@ -43,19 +45,27 @@ void LegitBot::run(CUserCmd* cmd)
 	if (!local_player || !local_player->is_alive())
 		return;
 
-	if (GetAsyncKeyState(VK_LBUTTON))
+	auto weapon = local_player->get_active_weapon();
+
+	if (!weapon || !weapon->can_fire(true))
+		return;
+
+	auto target = get_target(cmd);
+	if (target == nullptr)
+		return;
+	
+	if (GetAsyncKeyState(settings::legit_bot::aim_key) || !settings::legit_bot::aim_key || (settings::legit_bot::auto_fire && (GetAsyncKeyState(settings::legit_bot::auto_fire_key) || !settings::legit_bot::auto_fire_key)))
 	{
-		auto target = get_target(cmd);
-		if (target == nullptr)
-			return;
-		
-		if (player_valid(target, false))
+		if (player_valid(target, true, true))
 		{
 			auto angle = math::calc_angle(local_player->get_eye_pos(), target->get_eye_pos());
 
 			cmd->viewangles = angle;
 			interfaces->engine->set_viewangles(angle);
 
+			if (settings::legit_bot::auto_fire)
+				if (GetAsyncKeyState(settings::legit_bot::auto_fire_key) || !settings::legit_bot::auto_fire_key)
+					cmd->buttons |= IN_ATTACK;
 		}
 	}
 }

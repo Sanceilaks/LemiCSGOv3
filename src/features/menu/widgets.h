@@ -20,4 +20,6 @@ namespace ImGui
 	IMGUI_API void EndGroupPanel();
 	
 	IMGUI_API bool SizedCombo(const char* label, int* current_item, const char* const items[], int items_count, ImVec2 size, int height_in_items = -1);
+
+	IMGUI_API bool Hotkey(const char* label, int* k, const ImVec2& size_arg = ImVec2(0, 0));
 }

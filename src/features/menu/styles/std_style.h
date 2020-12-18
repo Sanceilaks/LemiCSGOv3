@@ -12,6 +12,7 @@ void set_std_imstyle()
     style->ChildRounding = 0.3f;
     style->WindowMinSize = ImVec2(900, 510);
     style->WindowPadding = ImVec2(10, 10);
+    style->GrabRounding = 10.f;
 	
     colors[ImGuiCol_Text] = ImVec4(0.70f, 1.00000f, 0.98f, 1.00f);
     colors[ImGuiCol_TextDisabled] = ImVec4(0.152f, 0.247f, 0.243f, 1.00f);

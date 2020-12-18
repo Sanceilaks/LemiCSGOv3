@@ -1,7 +1,8 @@
 #pragma once
 #include "c_base_entity.h"
 #include "game_sdk/interfaces/i_engine_trace.h"
-
+#include "../misc/e_handle.h"
+#include "items.h"
 
 enum EEntityFlag
 {
@@ -35,7 +36,7 @@ enum Bones
 
 class CBasePlayer : public CBaseEntity
 {
-public:
+public:	//m_bIsDefusing
 	NETVAR("DT_BasePlayer", "m_iHealth", get_health, int);
 	NETVAR("DT_BasePlayer", "m_fFlags", get_flags, int);
 	NETVAR("DT_BasePlayer", "m_lifeState", get_life_state, bool);
@@ -43,7 +44,19 @@ public:
 	NETVAR("CBasePlayer", "m_vecVelocity[0]", get_velocity, Vector);
 	NETVAR("DT_BaseEntity", "m_vecOrigin", get_origin, Vector);
 	NETVAR("DT_BasePlayer", "m_vecViewOffset[0]", get_view_offset, Vector);
-	NETVAR("DT_BasePlayer", "m_nTickBase", get_tick_base, float);
+	NETVAR("DT_BasePlayer", "m_nTickBase", get_tick_base, int);
+	NETVAR("DT_CSPlayer", "m_bIsDefusing", is_defusing, bool);
+	NETVAR("DT_BaseCombatCharacter", "m_flNextAttack", get_next_attack, float);
+	NETVAR("DT_BaseCombatCharacter", "m_hActiveWeapon", get_active_weapon_handle, CHandle<CWeapon>);
+
+
+	auto get_active_weapon() -> CWeapon*
+	{
+		if (!this)
+			return nullptr;
+
+		return (CWeapon*)interfaces->entity_list->get_entity_by_handle(get_active_weapon_handle());
+	}
 	
 	inline Vector get_eye_pos()
 	{
@@ -54,6 +67,9 @@ public:
 
 	bool is_sees(CBasePlayer* hit)
 	{
+		if (!this)
+			return false;
+		
 		if (!is_alive())
 			return false;
 		
@@ -77,6 +93,9 @@ public:
 
 	bool is_sees(CBasePlayer* hit, Vector pos)
 	{
+		if (!this)
+			return false;
+		
 		if (!is_alive())
 			return false;
 		
@@ -100,6 +119,9 @@ public:
 
 	bool is_sees_foreach_bone(CBasePlayer* ply, int max_bones = 19)
 	{
+		if (!this)
+			return false;
+		
 		if (!is_alive())
 			return false;
 		
@@ -116,6 +138,9 @@ public:
 	
 	const Vector& get_entity_bone(int bone)
 	{
+		if (!this)
+			return Vector();
+		
 		if (!is_alive())
 			return Vector(0.f, 0.f, 0.f);
 		
@@ -131,6 +156,9 @@ public:
 
 	player_info_t get_player_info()
 	{
+		if (!this)
+			return player_info_t();
+		
 		player_info_t player_info;
 		interfaces->engine->get_player_info(index(), &player_info);
 		return player_info;
@@ -143,6 +171,9 @@ public:
 
 	std::string get_player_name()
 	{
+		if (!this)
+			return std::string();
+		
 		std::string name = get_player_info().m_player_name;
 		return name;
 	}
@@ -159,7 +190,7 @@ inline static CBasePlayer* get_player_by_index(int index)
 	return static_cast<CBasePlayer*>(interfaces->entity_list->get_entity_by_index(index));
 }
 
-inline static CBasePlayer* get_player_by_handle(uintptr_t handle)
+inline static CBasePlayer* get_player_by_handle(CBaseHandle handle)
 {
 	return static_cast<CBasePlayer*>(interfaces->entity_list->get_entity_by_handle(handle));
 }

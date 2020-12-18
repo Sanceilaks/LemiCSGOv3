@@ -39,7 +39,17 @@ namespace settings
 	namespace visuals
 	{
 		extern int fov;
-
+		extern bool draw_fov;
 		
+	}
+
+	namespace legit_bot
+	{
+		extern bool enable;
+		extern float fov;
+		extern bool only_visible;
+		extern bool auto_fire;
+		extern int aim_key;
+		extern int auto_fire_key;
 	}
 }

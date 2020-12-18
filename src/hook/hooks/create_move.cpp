@@ -9,7 +9,9 @@
 
 #include <features/legitbot/legitbot.h>
 #include <features/prediction_system/prediction_system.h>
+#include <features/menu/menu.h>
 
+#include <globals.h>
 
 void bhop(CUserCmd* cmd)
 {
@@ -91,17 +93,66 @@ bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
 	_asm mov move, ebp;
 	bool& sendpacket = *(***(bool****)(move)-1);
 
+    uintptr_t* frame_ptr;
+    __asm mov frame_ptr, ebp;
+	
 	auto local_player = get_local_player();
 
 	if (!local_player)
 		return false;
 
+    static auto should_recharge = false;    //for dt
+    if (should_recharge)
+    {
+        ++globals::ticks::ticks_allowed;
+
+        ucmd->tick_count = INT_MAX;
+        ucmd->forwardmove = 0.0f;
+        ucmd->sidemove = 0.0f;
+        ucmd->upmove = 0.0f;
+        ucmd->buttons &= ~IN_ATTACK;
+        ucmd->buttons &= ~IN_ATTACK2;
+
+        if (globals::ticks::ticks_allowed >= 16)
+        {
+            should_recharge = false;
+            *(bool*)(*frame_ptr - 0x1C) = true;
+        }
+        else
+            *(bool*)(*frame_ptr - 0x1C) = false;
+
+    	return false;
+    }
+    if (globals::ticks::ticks_allowed < 16 /*&& dt staff*/)
+        should_recharge = true;
+
+    //best tick save imao
+    {   
+        globals::ticks::backup_tickbase = local_player->get_tick_base();
+
+        if (globals::ticks::next_tickbase_shift)
+            globals::ticks::fixed_tickbase = local_player->get_tick_base() - globals::ticks::next_tickbase_shift;
+        else
+            globals::ticks::fixed_tickbase = globals::ticks::backup_tickbase;
+    }
+
+	//best menu fix
+    if (menu->open)
+    {
+        ucmd->buttons &= ~IN_ATTACK;
+        ucmd->buttons &= ~IN_ATTACK2;
+    }
+
+    globals::ticks::tickbase_shift = 0;
+	
 	//move
     {
         bhop(ucmd);
         auto_strafe(ucmd);
     }
 
+
+	
     prediction_system->start(ucmd);
     {
         legit_bot->run(ucmd);

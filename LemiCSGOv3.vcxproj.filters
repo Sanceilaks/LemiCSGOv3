@@ -135,6 +135,9 @@
     <ClCompile Include="src\features\prediction_system\prediction_system.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\game_sdk\entitys\items.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hack_core.h">
@@ -257,9 +260,6 @@
     <ClInclude Include="src\game_sdk\misc\color.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\game_sdk\entitys\c_base_entity.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="src\game_sdk\entitys\c_base_player.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -357,6 +357,18 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="src\features\prediction_system\prediction_system.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_sdk\entitys\c_base_entity.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_sdk\entitys\items.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_sdk\misc\e_handle.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_sdk\misc\c_base_handle.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

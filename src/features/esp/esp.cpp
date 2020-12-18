@@ -160,26 +160,26 @@ void Esp::draw()
 	
 	for (auto i = 0; i <= interfaces->gvars->max_clients; ++i)
 	{
-		CBasePlayer* ent = get_player_by_index(i);
+		CBaseEntity* ent = get_player_by_index(i);
 
 		if (!is_entity_valid(ent))
 			continue;
 
 		math::box box;
 
-		if (!get_player_box(static_cast<CBasePlayer*>(ent), box))
+		if (!get_player_box((CBasePlayer*)(ent), box))
 			continue;
 
 		if (!is_entity_valid(ent))
 			continue;
 		
-		draw_box(static_cast<CBasePlayer*>(ent), box);
+		draw_box((CBasePlayer*)(ent), box);
 
 		if (settings::esp::draw_name)
-			draw_name(static_cast<CBasePlayer*>(ent), box);
+			draw_name((CBasePlayer*)(ent), box);
 
 		if (settings::esp::draw_health)
-			draw_health(static_cast<CBasePlayer*>(ent), box);
+			draw_health((CBasePlayer*)(ent), box);
 
 		//if (settings::esp::draw_bone_ids)
 		//{

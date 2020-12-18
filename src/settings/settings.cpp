@@ -1,4 +1,6 @@
 #include "settings.h"
+#include <Windows.h>
+
 
 namespace settings
 {
@@ -13,8 +15,8 @@ namespace settings
 		bool draw_health = true;
 		bool draw_scoped = false;
 		
-		float visible_color[4] = {0, 0, 0, 1};
-		float invisible_color[4] = {0, 0, 0, 1};
+		float visible_color[4] = {0.f, 1.f, 0.f, 1.f};
+		float invisible_color[4] = {1.f, 0.f, 0.f, 1.f};
 
 		float health_color[4] = {0.f, 1.f, 0.f, 1.f};
 		float void_health_color[4] = { 180.f, 180.f, 180.f, 1.f };
@@ -25,6 +27,20 @@ namespace settings
 	namespace visuals
 	{
 		int fov = 0;
+		bool draw_fov = true;
 		
 	}
+
+	namespace legit_bot
+	{
+		bool enable = true;
+		float fov = 30.f;
+		bool only_visible = true;
+		bool auto_fire = false;
+		int aim_key = VK_LBUTTON;
+		int auto_fire_key = VK_LMENU;
+		
+	}
+	
 }
+

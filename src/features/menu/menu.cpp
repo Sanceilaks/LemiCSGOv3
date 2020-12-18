@@ -81,9 +81,29 @@ void draw_top_bar()
 
 void draw_legit_bot()
 {
+	ImGui::BeginGroup();
 	{
-
+		ImGui::BeginGroupPanel("LegitBot", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
+		{
+			ImGui::ToggleButton("Enable##legitbot", &settings::legit_bot::enable, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Only visible##legitbot", &settings::legit_bot::only_visible, TOGGLE_BUTTON_SIZE);
+			{
+				ImGui::ToggleButton("Auto fire##legitbot", &settings::legit_bot::auto_fire, TOGGLE_BUTTON_SIZE);
+				if (settings::legit_bot::auto_fire)
+				{
+					ImGui::SameLine(0, 100);
+					ImGui::Hotkey("Autofire key", &settings::legit_bot::auto_fire_key, ImVec2(150, 0));
+				}
+			}
+			
+			ImGui::SliderFloat("Fov##legitbot", &settings::legit_bot::fov, 0.f, 180.f, "%.0f", 1.f);
+			
+			ImGui::Hotkey("Aim key", &settings::legit_bot::aim_key);
+			
+		}
+		ImGui::EndGroupPanel();
 	}
+	ImGui::EndGroup();
 }
 
 void draw_rage()
@@ -135,7 +155,10 @@ void draw_visuals()
 
 		ImGui::BeginGroupPanel("Self", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
 		{
-			ImGui::SliderInt("Fov##selfvisuals", &settings::visuals::fov, 0, 360);
+			ImGui::ToggleButton("Draw fov##espbox", &settings::visuals::draw_fov, TOGGLE_BUTTON_SIZE);
+			
+			ImGui::SliderInt("Fov##selfvisuals", &settings::visuals::fov, 0, 89);
+
 		}
 		ImGui::EndGroupPanel();
 	}
