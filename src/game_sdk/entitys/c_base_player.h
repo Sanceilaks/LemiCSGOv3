@@ -33,6 +33,21 @@ enum Bones
 	HAND_L
 };
 
+enum MoveType : int
+{
+	MOVETYPE_NONE = 0,
+	MOVETYPE_ISOMETRIC,
+	MOVETYPE_WALK,
+	MOVETYPE_STEP,
+	MOVETYPE_FLY,
+	MOVETYPE_FLYGRAVITY,
+	MOVETYPE_VPHYSICS,
+	MOVETYPE_PUSH,
+	MOVETYPE_NOCLIP,
+	MOVETYPE_LADDER,
+	MOVETYPE_OBSERVER,
+	MOVETYPE_CUSTOM
+};
 
 class CBasePlayer : public CBaseEntity
 {
@@ -48,7 +63,12 @@ public:	//m_bIsDefusing
 	NETVAR("DT_CSPlayer", "m_bIsDefusing", is_defusing, bool);
 	NETVAR("DT_BaseCombatCharacter", "m_flNextAttack", get_next_attack, float);
 	NETVAR("DT_BaseCombatCharacter", "m_hActiveWeapon", get_active_weapon_handle, CHandle<CWeapon>);
-
+	NETVAR("DT_BasePlayer", "m_aimPunchAngle", get_aim_punch, Vector);
+	NETVAR("DT_BasePlayer", "m_iFOV", get_fov, int32_t);
+	NETVAR("DT_BasePlayer", "m_iDefaultFOV", get_def_fov, int32_t);
+	
+	
+	OFFSET(int, move_type, 0x25C);
 
 	auto get_active_weapon() -> CWeapon*
 	{
@@ -146,7 +166,7 @@ public:	//m_bIsDefusing
 		
 		matrix3x4_t boneMatrix[128];
 
-		if (!this->setup_bones(boneMatrix, 128, 0x00000100, interfaces->engine->get_last_time_stamp()))
+		if (!this->setup_bones(boneMatrix, 128, 0x00000100, interfaces->gvars->curtime))
 			return Vector(0, 0, 0);
 
 		matrix3x4_t hitbox = boneMatrix[bone];

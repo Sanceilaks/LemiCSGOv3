@@ -12,24 +12,63 @@
 #include <features/menu/overlay/overlay.h>
 #include <features/esp/esp.h>
 
+#include <hack_core.h>
+
+#include <tools/hotkeys_tool.h>
+
 static bool inited = false;
 static WNDPROC wnd_proc = nullptr;
 
 LRESULT STDMETHODCALLTYPE my_wndproc(HWND window, UINT message_type, WPARAM w_param, LPARAM l_param)
 {
+    if (message_type == WM_CLOSE)
+    {
+        hack_core->destroy();
+    }
+	
     if (message_type == WM_KEYDOWN)
     {
         if (w_param == VK_INSERT)
             menu->open = !menu->open;
-        //if (w_param == VK_DELETE)
-        //    //CHackCore::get().shutdown();
     }
-
+	
     if (ImGui_ImplWin32_WndProcHandler(window, message_type, w_param, l_param) && menu->open)
     {
         interfaces->surface->unlock_cursor();
         return true;
     }
+	
+    //if (message_type == WM_KEYDOWN)
+    //    hotkeys_tool::on_key_down(int(w_param));
+    //else if (message_type == WM_KEYUP)
+    //    hotkeys_tool::on_key_up(int(w_param));
+
+    //if (message_type == WM_MBUTTONDOWN)
+    //    hotkeys_tool::on_key_down(VK_MBUTTON);
+    //else if (message_type == WM_MBUTTONUP)
+    //    hotkeys_tool::on_key_up(VK_MBUTTON);
+
+    //if (message_type == WM_RBUTTONDOWN)
+    //    hotkeys_tool::on_key_down(VK_RBUTTON);
+    //else if (message_type == WM_RBUTTONUP)
+    //    hotkeys_tool::on_key_up(VK_RBUTTON);
+
+    //if (message_type == WM_LBUTTONDOWN)
+    //    hotkeys_tool::on_key_down(VK_LBUTTON);
+    //else if (message_type == WM_LBUTTONUP)
+    //    hotkeys_tool::on_key_up(VK_LBUTTON);
+
+    //if (message_type == WM_XBUTTONDOWN)
+    //    hotkeys_tool::on_key_down(HIWORD(w_param) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2);
+    //else if (message_type == WM_XBUTTONUP)
+    //    hotkeys_tool::on_key_up(HIWORD(w_param) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2);
+
+    //if (message_type == WM_SYSKEYDOWN)
+    //    hotkeys_tool::on_key_down(int(w_param));
+    //else if (message_type == WM_SYSKEYUP)
+    //    hotkeys_tool::on_key_up(int(w_param));
+
+	
     return CallWindowProc(wnd_proc, window, message_type, w_param, l_param);
 }
 

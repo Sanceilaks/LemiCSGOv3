@@ -83,6 +83,23 @@ void auto_strafe(CUserCmd* cmd)
     cmd->sidemove = (sin_rot * cmd->forwardmove) + (cos_rot * cmd->sidemove);
 }
 
+auto stop_move(CUserCmd* cmd)
+{
+    auto local_player = get_local_player();
+
+    if (!local_player || !local_player->is_alive())
+        return;
+
+    if (local_player->move_type() != MOVETYPE_WALK)
+        return;
+
+    Vector vel = local_player->get_velocity();
+    vel.z = 0;
+    float speed = vel.length2d();
+
+    cmd->forwardmove = 0.f;
+    cmd->sidemove = 0.f;
+}
 
 bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
 {
@@ -141,6 +158,8 @@ bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
     {
         ucmd->buttons &= ~IN_ATTACK;
         ucmd->buttons &= ~IN_ATTACK2;
+
+        stop_move(ucmd);
     }
 
     globals::ticks::tickbase_shift = 0;
@@ -164,6 +183,9 @@ bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
     ucmd->viewangles.clamp();
 
     interfaces->engine->set_viewangles(ucmd->viewangles);
+
+    if (ucmd->buttons & IN_ATTACK)
+        stop_move(ucmd);
 	
 	return false;
 }

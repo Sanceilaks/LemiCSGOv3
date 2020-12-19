@@ -28,6 +28,8 @@ namespace settings
 	{
 		int fov = 0;
 		bool draw_fov = true;
+		bool override_aspect_ratio = false;
+		float aspect_ratio = 200;
 		
 	}
 

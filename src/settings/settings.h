@@ -40,6 +40,8 @@ namespace settings
 	{
 		extern int fov;
 		extern bool draw_fov;
+		extern bool override_aspect_ratio;
+		extern float aspect_ratio;
 		
 	}
 

@@ -155,10 +155,13 @@ void draw_visuals()
 
 		ImGui::BeginGroupPanel("Self", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
 		{
-			ImGui::ToggleButton("Draw fov##espbox", &settings::visuals::draw_fov, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Draw fov##selfvisuals", &settings::visuals::draw_fov, TOGGLE_BUTTON_SIZE);
 			
 			ImGui::SliderInt("Fov##selfvisuals", &settings::visuals::fov, 0, 89);
 
+			ImGui::ToggleButton("Override aspect ratio##selfvisuals", &settings::visuals::override_aspect_ratio, TOGGLE_BUTTON_SIZE);
+			if (settings::visuals::override_aspect_ratio)
+				ImGui::SliderFloat("Aspect ratio##selfvisuals", &settings::visuals::aspect_ratio, 0, 200, "%.0f", 1.f);
 		}
 		ImGui::EndGroupPanel();
 	}

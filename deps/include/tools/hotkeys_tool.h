@@ -12,20 +12,15 @@
 
 namespace hotkeys_tool
 {
-	enum key_state
-	{
-		none = 1,
-		down,
-		up,
-		pressed
-	};
-
-	DEFINE_ENUM_FLAG_OPERATORS(key_state);
+	LAPI void init();
 	
-	void init();
-
+	LAPI void on_key_down(int code);
+	LAPI void on_key_up(int code);
 	
-	key_state get_key_state(int key);
-	void set_key_state(int key, bool state);
+	
+	LAPI void on_mouse_move(double x, double y);
+
+	LAPI bool is_key_pressed(int code);
+	LAPI bool is_key_up(int code);
 	
 }

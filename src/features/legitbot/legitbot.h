@@ -9,5 +9,4 @@ class LegitBot
 public:
 	auto get_target(CUserCmd* cmd) -> CBasePlayer*;
 	void run(CUserCmd* cmd);
-	
 }; extern LegitBot* legit_bot;

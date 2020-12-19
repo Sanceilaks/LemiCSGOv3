@@ -36,6 +36,8 @@ void init()
 	GetUserName((TCHAR*)name, &size);
 	
 	interfaces->cvar->console_color_printf(Color(255, 0, 0), "Hello, %s\n\n", name);
+
+	hack_core->dll = g_dll;
 }
 
 
