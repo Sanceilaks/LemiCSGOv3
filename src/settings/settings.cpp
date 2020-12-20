@@ -21,7 +21,7 @@ namespace settings
 		float health_color[4] = {0.f, 1.f, 0.f, 1.f};
 		float void_health_color[4] = { 180.f, 180.f, 180.f, 1.f };
 
-		bool draw_bone_ids = false;
+		bool draw_bones = false;
 	}
 
 	namespace visuals
@@ -41,7 +41,14 @@ namespace settings
 		bool auto_fire = false;
 		int aim_key = VK_LBUTTON;
 		int auto_fire_key = VK_LMENU;
-		
+
+		bool rcs_enable = true;
+		float rcs_factor = 2.f;
+
+		bool aim_step = true;
+		float aim_step_amount = 25.f;
+
+		float smooth = 0.f;
 	}
 	
 }

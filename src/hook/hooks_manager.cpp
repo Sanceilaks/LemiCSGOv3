@@ -16,6 +16,7 @@ void HooksManager::init()
 	hooks::reset_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->direct_device, hooks::reset_hook::index));
 	hooks::override_view_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->client_mode, hooks::override_view_hook::index));
 	hooks::lock_cursor_hook::target = reinterpret_cast<void*>(get_virtual(interfaces->surface, hooks::lock_cursor_hook::index));
+	hooks::draw_model_execute::target = reinterpret_cast<void*>(get_virtual(interfaces->model_render, hooks::draw_model_execute::index));
 	
 	if (MH_Initialize() != MH_OK)
 	{
@@ -45,6 +46,11 @@ void HooksManager::init()
 	if (MH_CreateHook(hooks::lock_cursor_hook::target, &hooks::lock_cursor_hook::hook, reinterpret_cast<void**>(&hooks::lock_cursor_hook::original)) != MH_OK)
 	{
 		throw std::exception("Failed to hook lock_cursor_hook");
+	}
+
+	if (MH_CreateHook(hooks::draw_model_execute::target, &hooks::draw_model_execute::hook, reinterpret_cast<void**>(&hooks::draw_model_execute::original)) != MH_OK)
+	{
+		throw std::exception("Failed to hook draw_model_execute");
 	}
 	
 	MH_EnableHook(MH_ALL_HOOKS);

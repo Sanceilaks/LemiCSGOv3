@@ -104,6 +104,34 @@ void draw_legit_bot()
 		ImGui::EndGroupPanel();
 	}
 	ImGui::EndGroup();
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+	{
+		ImGui::BeginGroupPanel("Weapon", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
+		{
+			ImGui::Text("Weapon override settings where...");
+		}
+		ImGui::EndGroupPanel();
+	}
+	ImGui::EndGroup();
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+	{
+		ImGui::BeginGroupPanel("Accuracy", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
+		{
+			ImGui::ToggleButton("Aim step##legitbot", &settings::legit_bot::aim_step, TOGGLE_BUTTON_SIZE);
+			if (settings::legit_bot::aim_step)
+				ImGui::SliderFloat("Aim step amount##legitbot", &settings::legit_bot::aim_step_amount, 0.f, 25.f, "%.0f", 1.f);
+			
+			ImGui::ToggleButton("RCS##legitbot", &settings::legit_bot::rcs_enable, TOGGLE_BUTTON_SIZE);
+			if (settings::legit_bot::rcs_enable)
+				ImGui::SliderFloat("RCS factor##legitbot", &settings::legit_bot::rcs_factor, 1.f, 3.f, "%.2f");
+
+			ImGui::SliderFloat("Smooth##legitbot", &settings::legit_bot::smooth, 0.f, 40.f, "%.2f");
+		}
+		ImGui::EndGroupPanel();
+	}
+	ImGui::EndGroup();
 }
 
 void draw_rage()
@@ -119,25 +147,28 @@ void draw_visuals()
 	{
 		ImGui::BeginGroupPanel("ESP", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
 		{
-			ImGui::ToggleButton("Enable##espbox", &settings::esp::enabled, TOGGLE_BUTTON_SIZE);
-			ImGui::ToggleButton("Team check##espbox", &settings::esp::team_check, TOGGLE_BUTTON_SIZE);
-			ImGui::ToggleButton("Only visible##espbox", &settings::esp::only_visible, TOGGLE_BUTTON_SIZE);
-			ImGui::ToggleButton("Name##espbox", &settings::esp::draw_name, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Enable##esp", &settings::esp::enabled, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Team check##esp", &settings::esp::team_check, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Only visible##esp", &settings::esp::only_visible, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Name##esp", &settings::esp::draw_name, TOGGLE_BUTTON_SIZE);
 			//ImGui::ToggleButton("Bone ids##espbox", &settings::esp::draw_bone_ids, TOGGLE_BUTTON_SIZE);
-			ImGui::SizedCombo("Box type##espbox", &settings::esp::box_type, settings::esp::box_types, 3, ImVec2(120, 0));
+			ImGui::SizedCombo("Box type##esp", &settings::esp::box_type, settings::esp::box_types, 3, ImVec2(120, 0));
 			ImGui::Spacing();
-			ImGui::ToggleButton("Health##espbox", &settings::esp::draw_health, TOGGLE_BUTTON_SIZE);
-			ImGui::ToggleButton("Scoped##espbox", &settings::esp::draw_scoped, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Health##esp", &settings::esp::draw_health, TOGGLE_BUTTON_SIZE);
+			ImGui::ToggleButton("Scoped##esp", &settings::esp::draw_scoped, TOGGLE_BUTTON_SIZE);
 
-			ImGui::EndGroupPanel();
-
-			ImGui::EndGroup();
-			ImGui::SameLine();
-			ImGui::BeginGroup();
-
-			ImGui::BeginGroupPanel("Chams", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
-
-
+			ImGui::Spacing();
+			ImGui::ToggleButton("Draw bones#esp", &settings::esp::draw_bones, TOGGLE_BUTTON_SIZE);
+		}
+		ImGui::EndGroupPanel();
+	}
+	ImGui::EndGroup();
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+	{
+		ImGui::BeginGroupPanel("Chams", ImVec2(CHILDE_SIZE_W, -1.f), Color(ImGui::GetStyle().Colors[ImGuiCol_ChildBg]), Color(32, 32, 32));
+		{
+			
 		}
 		ImGui::EndGroupPanel();
 	}

@@ -184,8 +184,8 @@ bool __stdcall hooks::create_move_hook::hook(float frame_time, CUserCmd* ucmd)
 
     interfaces->engine->set_viewangles(ucmd->viewangles);
 
-    if (ucmd->buttons & IN_ATTACK)
-        stop_move(ucmd);
+    //if (ucmd->buttons & IN_ATTACK)
+    //    stop_move(ucmd);
 	
 	return false;
 }

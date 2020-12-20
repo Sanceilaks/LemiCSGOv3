@@ -7,6 +7,8 @@
 
 #include "math/vmatrix.h"
 
+#include <game_sdk/misc/studio.h>
+
 typedef struct player_info_s {
 	int64_t __pad0;
 	int xuid_low;
@@ -35,7 +37,6 @@ public:
 
 typedef struct InputContextHandle_t__* input_context_handle_t;
 struct client_textmessage_t;
-class model_t;
 class surf_info;
 class i_material;
 class c_sentence;

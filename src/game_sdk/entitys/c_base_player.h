@@ -20,17 +20,42 @@ enum EEntityFlag
 
 enum Bones
 {
-	PLEVIS = 0,
-	SPINE_0,
-	SPINE_1,
-	SPINE_2,
-	SPINE_3,
-	NECK_0,
-	HEAD_0,
-	CALVICLE_L,
-	ARM_UPPER_L,
-	ARM_LOWER_L,
-	HAND_L
+	BONE_HEAD = 8,
+	BONE_NEAK = 2,
+	BONE_UPPER_BODY = 7,
+	BONE_BODY = 6,
+	BONE_CENTER_BODY = 5,
+	BONE_BUTTOM_BODY = 4,
+	BONE_PLEVIS = 3,
+	BONE_RIGHT_LEG_1 = 72,
+	BONE_RIGHT_LEG_2 = 77,
+	BONE_RIGHT_LEG_3 = 78,
+	BONE_RIGHT_LEG_4 = 73,
+	BONE_RIGHT_FOOT_1 = 74,
+	BONE_RIGHT_FOOT_2 = 76,
+	BONE_RIGHT_FOOT_3 = 75,
+
+	BONE_LEFT_LEG_1 = 65,
+	BONE_LEFT_LEG_2 = 70,
+	BONE_LEFT_LEG_3 = 66,
+	BONE_LEFT_LEG_4 = 71,
+	BONE_LEFT_FOOT_1 = 69,
+	BONE_LEFT_FOOT_2 = 68,
+	BONE_LEFT_FOOT_3 = 67,
+
+	BONE_RIGHT_ARM_1 = 38,
+	BONE_RIGHT_ARM_2 = 64,
+	BONE_RIGHT_ARM_3 = 39,
+	BONE_RIGHT_ARM_4 = 62,
+
+	BONE_RIGHT_HAND = 60,
+
+	BONE_LEFT_ARM_1 = 10,
+	BONE_LEFT_ARM_2 = 36,
+	BONE_LEFT_ARM_3 = 11,
+	BONE_LEFT_ARM_4 = 34,
+
+	BONE_LEFT_HAND = 81
 };
 
 enum MoveType : int
@@ -137,7 +162,7 @@ public:	//m_bIsDefusing
 		return false;
 	}
 
-	bool is_sees_foreach_bone(CBasePlayer* ply, int max_bones = 19)
+	bool is_sees_foreach_bone(CBasePlayer* ply, int max_bones = 128)
 	{
 		if (!this)
 			return false;
@@ -222,12 +247,10 @@ inline static bool player_valid(CBasePlayer* entity, bool team_check = true, boo
 	if (!entity || !local_player)
 		return false;
 
-	if (!entity->is_player() || entity->is_dormant())
+	if (!entity->is_player() || !entity->is_alive() || entity->is_dormant())
 		return false;
 
-	CBasePlayer* ply = entity;
-
-	if (entity == local_player || !ply->is_alive())
+	if (entity == local_player)
 		return false;
 
 	if (team_check)
@@ -236,7 +259,7 @@ inline static bool player_valid(CBasePlayer* entity, bool team_check = true, boo
 
 	if (visible_check)
 	{
-		if (!local_player->is_sees_foreach_bone(ply))
+		if (!local_player->is_sees_foreach_bone(entity))
 			return false;
 	}
 

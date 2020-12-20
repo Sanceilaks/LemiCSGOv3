@@ -1,5 +1,6 @@
 #pragma once
 
+#include "game_sdk/misc/studio.h"
 #include "math/qangle.h"
 #include "math/vector3d.h"
 
@@ -11,7 +12,7 @@ typedef unsigned short ModelInstanceHandle_t;
 typedef unsigned char uint8_t;
 
 class IClientUnknown;
-struct model_t;
+
 
 class IClientRenderable
 {

@@ -37,7 +37,7 @@ void Overlay::draw()
 		render->draw_list->AddCircle(ImVec2(sw / 2, sh / 2), radius, Color(0, 0, 0).get_u32(), 124);
 	}
 
-	if (interfaces->engine->is_in_game() && local_player)
+	if (interfaces->engine->is_in_game() && local_player && settings::esp::draw_bones)
 	{
 		for (int i = 1; i <= interfaces->gvars->max_clients; i++)
 		{

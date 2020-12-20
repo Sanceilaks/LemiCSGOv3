@@ -62,6 +62,17 @@ namespace hooks
 		static inline fn original;
 		static inline void* target;
 	};
+
+	struct draw_model_execute
+	{
+		static const unsigned int index = 21;
+
+		using fn = void(__thiscall*)(IVModelRender*, IMatRenderContext*, const DrawModelState_t*, const ModelRenderInfo_t*, matrix3x4_t*);
+		static void __stdcall hook(IMatRenderContext* context, const DrawModelState_t& state, const ModelRenderInfo_t& info, matrix3x4_t* bone);
+
+		static inline fn original;
+		static inline void* target;
+	};
 }
 
 

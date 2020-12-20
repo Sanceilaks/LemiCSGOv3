@@ -1,6 +1,7 @@
 #pragma once
 
 #pragma region include_interfaces
+#include "game_sdk/interfaces/i_material_system.h"
 #include "game_sdk/interfaces/engine_client.h"
 #include "game_sdk/interfaces/v_client_entity_list.h"
 #include "game_sdk/interfaces/v_debug_overlay.h"
@@ -14,6 +15,7 @@
 #include "game_sdk/interfaces/i_game_movement.h"
 #include "game_sdk/interfaces/i_move_helper.h"
 #include "game_sdk/interfaces/i_prediction.h"
+#include "game_sdk/interfaces/iv_model_render.h"
 #include <d3d9.h>
 
 #pragma endregion 
@@ -37,6 +39,8 @@ public:
 	IGameMovement* game_movement;
 	IMoveHelper* move_helper;
 	IPrediction* prediction;
+	IMaterialSystem* material_system;
+	IVModelRender* model_render;
 	
 	void init();
 	void print_interfaces();

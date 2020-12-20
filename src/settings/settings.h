@@ -34,6 +34,8 @@ namespace settings
 		extern float invisible_color[4];
 		extern float void_health_color[4];
 		extern float health_color[4];
+
+		extern bool draw_bones;
 	};
 
 	namespace visuals
@@ -53,5 +55,13 @@ namespace settings
 		extern bool auto_fire;
 		extern int aim_key;
 		extern int auto_fire_key;
+
+		extern bool rcs_enable;
+		extern float rcs_factor;
+
+		extern bool aim_step;
+		extern float aim_step_amount;
+
+		extern float smooth;
 	}
 }

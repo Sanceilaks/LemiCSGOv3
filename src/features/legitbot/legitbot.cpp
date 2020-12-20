@@ -1,8 +1,34 @@
 #include "legitbot.h"
 #include <settings/settings.h>
 #include <tools/hotkeys_tool.h>
+#include <features/aim_step/aim_step.h>
 
 LegitBot* legit_bot = new LegitBot();
+
+bool do_smooth(float smooth, const Vector& from, const Vector& to, Vector& out)
+{
+	auto tickrate = 1.f / interfaces->gvars->interval_per_tick;
+	if (tickrate != 64.f)
+	{
+		smooth = tickrate * smooth / 64.f;
+	}
+
+	if (smooth < 1.1f)
+	{
+		out = to;
+		return true;
+	}
+
+	auto delta = to - from;
+	math::normalize_angles(delta);
+	
+	auto to_out = from + delta / smooth;
+	math::normalize_angles(to_out);
+
+	out = to_out;
+
+	return roundf(out.x) == roundf(to.x) && roundf(out.y) == roundf(to.y);
+}
 
 auto LegitBot::get_target(CUserCmd* cmd) -> CBasePlayer*
 {
@@ -23,7 +49,7 @@ auto LegitBot::get_target(CUserCmd* cmd) -> CBasePlayer*
 
 		Vector engine_angles;
 		interfaces->engine->get_viewangles(engine_angles);
-		float fov = math::get_fov(engine_angles, math::calc_angle(local_player->get_eye_pos(), ply->get_entity_bone(8)) - local_player->get_aim_punch() * 2);
+		float fov = math::get_fov(engine_angles, math::calc_angle(local_player->get_eye_pos(), ply->get_entity_bone(BONE_HEAD)) + local_player->get_aim_punch() * 2);
 
 		if (fov < BEST_FOV && fov <= settings::legit_bot::fov)
 		{
@@ -40,6 +66,9 @@ void LegitBot::run(CUserCmd* cmd)
 	if (!interfaces->engine->is_in_game())
 		return;
 
+	if (!settings::legit_bot::enable)
+		return;
+	
 	CBasePlayer* local_player = get_local_player();
 	
 	if (!local_player || !local_player->is_alive())
@@ -49,32 +78,33 @@ void LegitBot::run(CUserCmd* cmd)
 
 	if (!weapon || !weapon->can_fire(true))
 		return;
-
-	CBasePlayer* target = nullptr;
-	
-	if (settings::legit_bot::enable && (!(cmd->buttons & IN_ATTACK) || !target))
-		target = get_target(cmd);
-	
-	if (target == nullptr)
-		return;
 	
 	if (GetAsyncKeyState(settings::legit_bot::aim_key) || !settings::legit_bot::aim_key || (settings::legit_bot::auto_fire && (GetAsyncKeyState(settings::legit_bot::auto_fire_key) || !settings::legit_bot::auto_fire_key)))
-	{		
+	{
+		CBasePlayer* target = nullptr;
+
+		if (settings::legit_bot::enable && !target)
+			target = get_target(cmd);
+
+		if (target == nullptr)
+			return;
+		
 		if (player_valid(target, true, true))
 		{
-			auto bone = target->get_entity_bone(6);
-			auto angle = math::calc_angle(local_player->get_eye_pos(), target->get_entity_bone(8)) - local_player->get_aim_punch() * 2;
-
+			auto angle = math::calc_angle(local_player->get_eye_pos(), target->get_entity_bone(BONE_HEAD));
+			auto to_ang = angle;
+			angle = angle - (settings::legit_bot::rcs_enable ? local_player->get_aim_punch() * settings::legit_bot::rcs_factor : Vector(0, 0, 0));
+			
+			auto smooth_finish = do_smooth(settings::legit_bot::smooth, cmd->viewangles, to_ang, angle);
+			
+			auto step_finish = settings::legit_bot::aim_step ? aim_step->run(cmd->viewangles, angle, angle) : true;
+			
 			cmd->viewangles = angle;
 			interfaces->engine->set_viewangles(angle);
 
 			if (settings::legit_bot::auto_fire)
-				if (GetAsyncKeyState(settings::legit_bot::auto_fire_key) || !settings::legit_bot::auto_fire_key)
+				if ((GetAsyncKeyState(settings::legit_bot::auto_fire_key) || !settings::legit_bot::auto_fire_key) && (smooth_finish && step_finish))
 					cmd->buttons |= IN_ATTACK;
-		}
-		else
-		{
-			target = nullptr;
 		}
 	}
 }

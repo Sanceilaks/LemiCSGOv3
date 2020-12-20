@@ -18,7 +18,8 @@ void Interfaces::init()
 	engine_trace = static_cast<IEngineTrace*>(mem_tools::capture_interface("engine.dll", "EngineTraceClient004"));
 	game_movement = static_cast<IGameMovement*>(mem_tools::capture_interface("client.dll", "GameMovement001"));
 	prediction = static_cast<IPrediction*>(mem_tools::capture_interface("client.dll", "VClientPrediction001"));
-
+	material_system = static_cast<IMaterialSystem*>(mem_tools::capture_interface("materialsystem.dll", "VMaterialSystem080"));
+	model_render = static_cast<IVModelRender*>(mem_tools::capture_interface("engine.dll", "VEngineModel016"));
 	
 	move_helper = **reinterpret_cast<IMoveHelper***>(mem_tools::pattern_scaner("client.dll", "8B 0D ? ? ? ? 8B 46 08 68") + 2);
 
